@@ -30,7 +30,7 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 
@@ -115,7 +115,7 @@ const NavItem = ({ icon, to, children, ...rest }) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
+          bg: "#ec066e",
           color: "white",
         }}
         {...rest}
