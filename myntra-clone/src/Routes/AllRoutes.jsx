@@ -1,15 +1,14 @@
+import React from 'react'
+import { Routes, Route } from "react-router-dom"
+import HomePage from "../Pages/HomePage"
 
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Admin from "../Pages/admin";
-
-function AllRoutes() {
-  return (
-    <Routes>
-      <Route path="/admin" element={<Admin />} />
-    </Routes>
-  );
+const AllRoutes = () => {
+    return (
+        <Routes>
+            <Route path='/' element={<HomePage />} />
+        </Routes>
+    )
 }
 
-export default AllRoutes;
+export default AllRoutes
 

@@ -1,0 +1,23 @@
+.hideSearchBarMobile {
+    display: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .hideSearchBar {
+        display: none;
+
+    }
+
+    .hideSearchBarMobile {
+        display: block !important;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+    .hideinput {
+        display: none;
+    }
+
+}
