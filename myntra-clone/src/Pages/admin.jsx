@@ -1,8 +1,9 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 function Admin() {
   return (
-    <div>Admin</div>
+    <Box>Admin</Box>
   )
 }
 
