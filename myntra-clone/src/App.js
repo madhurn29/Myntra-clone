@@ -1,13 +1,19 @@
-import AdminRoutes from "./Routes/AdminRoutes";
-import AllRoutes from "./Routes/AllRoutes";
+
+import './App.css';
+import Footer from './Components/Footer';
+import Navbar from './Components/Navbar';
+import AllRoutes from './Routes/AllRoutes';
 
 function App() {
   return (
-    <div>
+    <div className="App">
+      <Navbar />
       <AllRoutes />
-      <AdminRoutes/>
+      <Footer />
     </div>
   );
+
+
 }
 
 export default App;
