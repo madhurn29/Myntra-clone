@@ -3,6 +3,7 @@ import React from 'react'
 
 
 function Admin() {
+  console.log('admin')
   return (
     <Box>Admin</Box>
   )
