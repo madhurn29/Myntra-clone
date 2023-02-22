@@ -1,9 +1,13 @@
-import React from 'react'
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import AdminSidebar from "../Components/AdminSidebar";
 
 function Analytics() {
   return (
-    <div>Analytics</div>
-  )
+    <AdminSidebar heading={"Analytics"}>
+      <Box></Box>
+    </AdminSidebar>
+  );
 }
 
-export default Analytics
+export default Analytics;

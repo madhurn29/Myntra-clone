@@ -1,8 +1,14 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
+import AdminSidebar from '../Components/AdminSidebar'
 
 function Favourites() {
   return (
-    <div>Favourites</div>
+    <AdminSidebar heading={"Favourites"} >
+      <Box>
+
+      </Box>
+    </AdminSidebar>
   )
 }
 

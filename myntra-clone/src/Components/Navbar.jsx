@@ -17,6 +17,7 @@ import {
     Image,
     Text,
 } from '@chakra-ui/react';
+
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import SearchBox from './SearchBox';
 import "./Dymmy.css"
