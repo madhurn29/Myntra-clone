@@ -41,7 +41,7 @@ const NavLink = ({ children }) => (
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [toggle, setToggle] = useState(false);
-    console.log("dfdfs")
+    // console.log("dfdfs")
 
     return (
         <>
