@@ -16,3 +16,5 @@ export const store = legacy_createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
+
+
