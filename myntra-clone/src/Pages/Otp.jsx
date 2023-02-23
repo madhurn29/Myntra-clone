@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/AuthReducer/Action";
+import { login } from "../Redux/AuthReducer/action";
 
 const Otp = () => {
   const [otpVal, setOtp] = useState(Math.floor(1000 + Math.random() * 9000));
