@@ -1,9 +1,11 @@
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../Pages/HomePage";
 import Otp from "../Pages/Otp";
 import Signup from "../Pages/Signup";
 import Wishlist from "../Pages/Wishlist";
+
 
 const AllRoutes = () => {
   return (
@@ -17,3 +19,6 @@ const AllRoutes = () => {
 };
 
 export default AllRoutes;
+
+
+

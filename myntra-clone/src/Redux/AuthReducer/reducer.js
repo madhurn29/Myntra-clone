@@ -1,4 +1,4 @@
-import * as types from "./ActionTypes";
+import * as types from "./actionTypes";
 
 const initialState = {
   isAuth: JSON.parse(localStorage.getItem("isAuth"))||false,
