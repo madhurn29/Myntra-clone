@@ -23,7 +23,7 @@ export const reducer = (state = initialState, action) => {
     }
 
     case GET_REQUEST_SUCCESS_ADMIN_SIDE: {
-      console.log(category);
+    //   console.log(category);
 
       if (category === "men-jeans") {
         return {

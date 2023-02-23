@@ -27,8 +27,9 @@ export const getRequestFailureAdminSide = () => {
 };
 
 export const getRequestforAdminSide = (params, category) => (dispatch) => {
-  console.log(category);
-  console.log(params);
+//   console.log(category);
+//   console.log(params);
+console.log("ji",category)
   axios
     .get(`https://easy-gray-wasp-yoke.cyclic.app/${category}`, { params })
     .then((res) => {

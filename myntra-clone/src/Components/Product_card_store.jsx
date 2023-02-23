@@ -2,11 +2,19 @@ import { Box, Image, Text, Icon } from "@chakra-ui/react";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
-function Product_card_store({ id,linkCategory, category, brand_name, images, name, price }) {
-  // console.log(category)
+function Product_card_store({
+  id,
+  linkCategory,
+  category,
+  brand_name,
+  images,
+  name,
+  price,
+}) {
+  //Todo: To go to edit product page, id is needed along with category , so i called 'linkCategory' and "category" as a prop here, linkCategory is the server path and category is just to get the reference of particular category so that i can filter accoridingly in edit product page
 
-  const handleDelete = (id,linkCategory) => {
-    console.log("hi",id,linkCategory);
+  const handleDelete = (id, linkCategory) => {
+    console.log("hi", id, linkCategory);
   };
   return (
     <Box boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px;"} cursor={"pointer"}>
@@ -32,7 +40,7 @@ function Product_card_store({ id,linkCategory, category, brand_name, images, nam
             {" "}
             ({price.discount}%)
           </Text>
-          <Icon as={MdDelete} onClick={()=>handleDelete(id,linkCategory)} />
+          <Icon as={MdDelete} onClick={() => handleDelete(id, linkCategory)} />
         </Box>
       </Box>
     </Box>
