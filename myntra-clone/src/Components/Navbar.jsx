@@ -17,6 +17,7 @@ import {
     Image,
     Text,
 } from '@chakra-ui/react';
+
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import SearchBox from './SearchBox';
 import "./Dymmy.css"
@@ -40,7 +41,7 @@ const NavLink = ({ children }) => (
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [toggle, setToggle] = useState(false);
-    console.log("dfdfs")
+    // console.log("dfdfs")
 
     return (
         <>
