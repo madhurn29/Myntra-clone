@@ -10,7 +10,10 @@ import Otp from "../Pages/Otp";
 import Signup from "../Pages/Signup";
 import Wishlist from "../Pages/Wishlist";
 import AddProducts from "../AdminPages/AddProducts";
-import MensJeans from '../Pages/MensJeans'
+import MensJeans from '../Pages/MensJeans';
+import {Cart} from '../Pages/CartPages/Cart'
+
+
 
 
 
@@ -29,6 +32,7 @@ const AllRoutes = () => {
       < Route path="/signup" element={< Signup />} />
       < Route path="/otp" element={< Otp />} />
       < Route path="/wishlist" element={< Wishlist />} />
+      <Route path='/cart' element={<Cart/>}/>
     </Routes >
   );
 };
