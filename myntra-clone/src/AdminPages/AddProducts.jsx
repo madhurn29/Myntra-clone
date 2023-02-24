@@ -2,12 +2,12 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import AdminSidebar from "../Components/AdminSidebar";
 
-function Analytics() {
+function AddProducts() {
   return (
-    <AdminSidebar heading={"Analytics"}>
+    <AdminSidebar heading={"Add Products"}>
       <Box></Box>
     </AdminSidebar>
   );
 }
 
-export default Analytics;
+export default AddProducts;

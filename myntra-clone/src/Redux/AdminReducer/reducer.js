@@ -2,6 +2,9 @@ import {
   GET_REQUEST_ADMIN_SIDE,
   GET_REQUEST_FAILURE_ADMIN_SIDE,
   GET_REQUEST_SUCCESS_ADMIN_SIDE,
+  PATCH_REQUEST_ADMIN_SIDE,
+  PATCH_REQUEST_FAILURE_ADMIN_SIDE,
+  PATCH_REQUEST_SUCCESS_ADMIN_SIDE,
 } from "../ActionTypes";
 
 const initialState = {
@@ -23,7 +26,7 @@ export const reducer = (state = initialState, action) => {
     }
 
     case GET_REQUEST_SUCCESS_ADMIN_SIDE: {
-      console.log(category);
+      //   console.log(category);
 
       if (category === "men-jeans") {
         return {
@@ -63,6 +66,27 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
         isError: true,
       };
+
+    case PATCH_REQUEST_ADMIN_SIDE: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case PATCH_REQUEST_SUCCESS_ADMIN_SIDE: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+
+    case PATCH_REQUEST_FAILURE_ADMIN_SIDE: {
+      return {
+        ...state,
+        isError: true,
+      };
+    }
     default:
       return state;
   }
