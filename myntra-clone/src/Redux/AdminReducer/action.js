@@ -49,7 +49,7 @@ export const patchRequestFailureAdminSide = () => {
 export const getRequestforAdminSide = (params, category) => (dispatch) => {
   dispatch(getRequestAdmin);
   axios
-    .get(`https://easy-gray-wasp-yoke.cyclic.app/${category}`, { params })
+    .get(`https://myntra-api-mfh1.onrender.com/${category}`, { params })
     .then((res) => {
       dispatch(getRequestSuccessAdminSide(res.data, category));
       //   console.log(res.data);
@@ -62,9 +62,9 @@ export const getRequestforAdminSide = (params, category) => (dispatch) => {
 export const patchRequestforAdminSide = (id, category, obj) => (dispatch) => {
   dispatch(patchRequestAdminSide);
 
-  console.log(id, category, obj,"from action");
+  console.log(id, category, obj, "from action");
   axios
-    .patch(`https://easy-gray-wasp-yoke.cyclic.app/${category}/${id}`, obj)
+    .patch(`https://myntra-api-mfh1.onrender.com/${category}/${id}`, obj)
     .then((res) => {
       dispatch(patchRequestSuccessAdminSide);
     })

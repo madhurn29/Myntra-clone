@@ -107,12 +107,18 @@ function EditProducts() {
     // console.log(data,+id);
     if (category === "menJeans") {
       dispatch(patchRequestforAdminSide(id, "men-jeans", data));
+    } else if (category === "mensTshirt") {
+      dispatch(patchRequestforAdminSide(id, "men-t-shirts", data));
+    } else if (category === "womensKurtas") {
+      dispatch(patchRequestforAdminSide(id, "women-kurtas-suits", data));
+    } else if (category === "womensTops") {
+      dispatch(patchRequestforAdminSide(id, "women-tops", data));
     }
   };
   return (
     <AdminSidebar>
       <Box border={"1px solid re"}>
-      <Box>
+        <Box>
           <Breadcrumb
             spacing="8px"
             separator={<ChevronRightIcon color="gray.500" />}
