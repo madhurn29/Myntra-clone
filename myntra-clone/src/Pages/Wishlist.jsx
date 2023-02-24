@@ -57,7 +57,7 @@ const Wishlist = () => {
           </Text>
         </HStack>
         <SimpleGrid columns={5} gap={"50px"} mt={8} mb={8}>
-          {/* {wishlist?.map((el) => {
+          {wishlist?.map((el) => {
             return (
               <SingleWishlistProduct
                 key={el.id}
@@ -66,7 +66,7 @@ const Wishlist = () => {
                 handleDelete={handleDelete}
               />
             );
-          })} */}
+          })}
         </SimpleGrid>
       </Box>
 
