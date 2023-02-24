@@ -1,0 +1,5 @@
+//get request
+
+export const GET_JEANS_REQUEST = "GET_JEANS_REQUEST"
+export const GET_JEANS_SUCCESS = "GET_JEANS_SUCCESS"
+export const GET_JEANS_FAILURE = "GET_JEANS_FAILURE"

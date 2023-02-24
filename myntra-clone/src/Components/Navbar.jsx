@@ -1,134 +1,130 @@
-import {
-    Box,
-    Flex,
-    Avatar,
-    HStack,
-    Link,
-    IconButton,
-    Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
-    useDisclosure,
-    useColorModeValue,
-    Stack,
-    Image,
-    Text,
-} from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import SearchBox from './SearchBox';
-import "./Dymmy.css"
-import { useState } from 'react';
-// const Links = ['Dashboard', 'Projects', 'Team'];
-
-const NavLink = ({ children }) => (
-    <Link
-        px={2}
-        py={1}
-        rounded={'md'}
-        _hover={{
-            textDecoration: 'none',
-            bg: useColorModeValue('gray.200', 'gray.700'),
-        }}
-        href={'#'}>
-        {children}
-    </Link>
-);
-
-export default function Navbar() {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [toggle, setToggle] = useState(false);
-    console.log("dfdfs")
-
-    return (
-        <>
-            <Box padding={"10px"} bg="#ffffff" px={4} w="90%" margin={"auto"}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                    <IconButton
-                        size={'md'}
-                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                        aria-label={'Open Menu'}
-                        display={{ md: 'none' }}
-                        onClick={isOpen ? onClose : onOpen}
-                    />
-                    <HStack spacing={8} alignItems={'center'}>
-                        <Box>
-                            <Image w="53px" h="46px" src="https://img.theweek.in/content/dam/week/news/myntra.jpg" alt="logo" />
-                        </Box>
-                        <HStack
-                            as={'nav'}
-                            spacing={4}
-                            display={{ base: 'none', md: 'flex' }}>
-                            <Text>MEN</Text>
-                            <Text>WOMEN</Text>
-                            <Text>KIDS</Text>
-                            <Text>HOME & LIVING</Text>
-                            <Text>BEAUTY</Text>
-                            <Text>STUDIO</Text>
-                        </HStack>
-                    </HStack>
+import { Box, Image, Text, Flex } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import styles from "../styles/Navbar.module.css"
+import SearchBox from './SearchBox'
+import { BsHeart } from 'react-icons/bs';
+import { BsHandbag } from 'react-icons/bs';
+import DrawerComponent from './Drawer';
+import PopupMen from './PopupMen';
+import Popupwomen from './Popupwomen';
+import Profile from './Profile';
+import ResponsiveProfile from './ResponsiveProfile';
+import { Link as RouterLink } from "react-router-dom";
 
 
 
-                    <Flex alignItems={'center'}>
-                        {/* {isOpen ? <SearchBox /> : null} */}
-                        {
-                            toggle ? <div className='hideinput'>
-                                <SearchBox /> <p onClick={() => setToggle(false)}>close</p>
-                            </div> :
-                                <div className='hideSearchBarMobile hideinput' onClick={() => setToggle(true)} >
 
-                                    button
+const Navbar = () => {
 
-                                </div>
-                        }
-                        
-                        <div className='hideSearchBar'>
-                            <SearchBox />
-                        </div>
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPopupWomen, setPopupWomen] = useState(false);
 
-
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}>
-                                <Avatar
-                                    size={'sm'}
-                                    src={
-                                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                                    }
-                                />
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem>Link 1</MenuItem>
-                                <MenuItem>Link 2</MenuItem>
-                                <MenuDivider />
-                                <MenuItem>Link 3</MenuItem>
-                            </MenuList>
-                        </Menu>
-                    </Flex>
-
-                </Flex>
-
-                {isOpen ? (
-                    <Box pb={4} display={{ md: 'none' }}>
-                        <Stack as={'nav'} spacing={4}>
-                            <Text>MEN</Text>
-                            <Text>WOMEN</Text>
-                            <Text>KIDS</Text>
-                            <Text>HOME & LIVING</Text>
-                            <Text>BEAUTY</Text>
-                            <Text>STUDIO</Text>
-                        </Stack>
-                    </Box>
-                ) : null}
+  return (
+    <>
+      {/* Desktop Navbar */}
+      <Box position={"sticky"} top="0px" zIndex={1000} margin={"auto"} display={"flex"} bg="#ffffff" className={styles.desktop_navbar} width="100%" height="80px">
+        <Box display={"flex"} gap={"25px"}>
+          <RouterLink to="/">
+            <Box>
+              <Image marginTop="8px" marginLeft={"30px"} w="60px" h="60px" src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png" />
             </Box>
-        </>
-    );
+          </RouterLink>
+
+          <Box
+            className={styles.men}
+            padding="25px 10px 25px 10px"
+            onMouseEnter={() => setIsVisible(true)}
+            onMouseLeave={() => setIsVisible(false)}
+            height="100%"
+          >
+            <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>MEN</Text>
+          </Box>
+
+          <Box
+            className={styles.women}
+            padding="25px 5px 25px 5px"
+            onMouseEnter={() => setPopupWomen(true)}
+            onMouseLeave={() => setPopupWomen(false)}
+          >
+            <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>WOMEN</Text>
+          </Box>
+
+
+          <Box
+            className={styles.men}
+            padding="25px 10px 25px 10px"
+            onMouseEnter={() => setIsVisible(true)}
+            onMouseLeave={() => setIsVisible(false)}
+          >
+            <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>KIDS</Text>
+          </Box>
+
+          <Box padding="25px 0px 25px 0px">
+            <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>HOME & LIVING</Text>
+          </Box>
+
+          <Box padding="25px 0 25px 0">
+            <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>BEAUTY</Text>
+          </Box>
+
+          <Box padding="25px 0px 25px 0px">
+            <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>STUDIO</Text>
+          </Box>
+        </Box>
+
+        <Box marginLeft={"130px"}>
+          <Flex>
+            <SearchBox />
+            <Flex padding={"15px 0px 15px 0px"} gap={"25px"}>
+              <Profile />
+              <Box>
+                <Box marginLeft={"15px"}>
+                  <BsHeart size={"20px"} />
+                </Box>
+                <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>Wishlist</Text>
+              </Box>
+              <Box>
+                <Box marginLeft={"5px"}>
+                  <BsHandbag size={"20px"} />
+                </Box>
+                <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>Bag</Text>
+              </Box>
+            </Flex>
+          </Flex>
+        </Box>
+      </Box>
+
+
+      {/* Mobile Navbar */}
+      <Box position={"sticky"} top="0px" zIndex={1000} display={"flex"} justifyContent="space-between" bg="#ffffff" padding={"13px"} className={styles.mobile_navbar} width="100%" margin={"auto"}>
+        <Box>
+          <Flex gap="15px">
+            <DrawerComponent />
+            <RouterLink to="/">
+              <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>Myntra</Text>
+            </RouterLink>
+          </Flex>
+        </Box>
+
+        <Box display={"flex"} gap="20px">
+          <Flex >
+            <ResponsiveProfile />
+          </Flex>
+          <Flex>
+            <BsHeart size={"20px"} />
+          </Flex>
+          <Flex>
+            <BsHandbag size={"20px"} />
+          </Flex>
+        </Box>
+      </Box>
+
+      <PopupMen isVisible={isVisible} />
+      <Popupwomen isVisible={isPopupWomen} />
+    </>
+  )
 }
+
+export default Navbar
+
 
