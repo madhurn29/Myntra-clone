@@ -1,7 +1,13 @@
-import { Box, Image, Text, Flex } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import {
+  Box,
+  Flex,
+  Image,
+  Text,
+} from '@chakra-ui/react';
+import SearchBox from './SearchBox';
+import { useState } from 'react';
 import styles from "../styles/Navbar.module.css"
-import SearchBox from './SearchBox'
+import { Link as RouterLink } from "react-router-dom"
 import { BsHeart } from 'react-icons/bs';
 import { BsHandbag } from 'react-icons/bs';
 import DrawerComponent from './Drawer';
@@ -9,15 +15,15 @@ import PopupMen from './PopupMen';
 import Popupwomen from './Popupwomen';
 import Profile from './Profile';
 import ResponsiveProfile from './ResponsiveProfile';
-import { Link as RouterLink } from "react-router-dom";
 
 
 
+export default function Navbar() {
 
-const Navbar = () => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isPopupWomen, setPopupWomen] = useState(false);
+
 
   return (
     <>
@@ -125,6 +131,5 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
 
 

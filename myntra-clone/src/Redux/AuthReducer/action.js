@@ -1,4 +1,4 @@
-import * as types from "./ActionTypes";
+import * as types from "./actionTypes";
 
 export const login = (logout) => (dispatch) => {
   dispatch({ type: types.GET_LOGIN_REQUEST });
@@ -11,5 +11,3 @@ export const login = (logout) => (dispatch) => {
     dispatch({ type: types.GET_LOGIN_FAILURE });
   }
 };
-
-
