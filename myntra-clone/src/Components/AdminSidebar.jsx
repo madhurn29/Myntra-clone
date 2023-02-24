@@ -37,7 +37,7 @@ import { ReactText } from "react";
 const LinkItems = [
   { name: "Dashboard", icon: FiHome, to: "/dashboard" },
   { name: "Store", icon: FiTrendingUp, to: "/store" },
-  { name: "Analytics", icon: FiCompass, to: "/analytics" },
+  { name: "Add Products", icon: FiCompass, to: "/addproducts" },
   { name: "Favourites", icon: FiStar, to: "/favourites" },
   { name: "Settings", icon: FiSettings, to: "/settings" },
 ];
@@ -167,11 +167,11 @@ const MobileNav = ({ onOpen, heading, ...rest }) => {
       </Text>
 
       <HStack
-        border={"1px solid red"}
+        border={"1px solid re"}
         w={"100%"}
         spacing={{ base: "0", md: "6" }}
       >
-        <Text>{heading}</Text>
+        <Text Text ml={"5px"}>{heading}</Text>
         <Spacer />
         <IconButton
           size="lg"

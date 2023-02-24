@@ -86,7 +86,7 @@ function Store() {
 
   const [category, setCategory] = useState(initialCategory || "men-jeans");
   const [brands, setBrands] = useState(initialBrand || "");
-  
+
   const [price, setPrice] = useState(initialPriceRange);
   const dispatch = useDispatch();
 
@@ -145,7 +145,6 @@ function Store() {
       setSearchParams(paramobj);
     }
 
-
     dispatch(getRequestforAdminSide(obj, category));
   }, [category, brands, price]);
 
@@ -163,7 +162,7 @@ function Store() {
             </BreadcrumbItem>
 
             <BreadcrumbItem>
-              <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+              <BreadcrumbLink href="#">Store</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -244,7 +243,7 @@ function Store() {
 
         {/* //Todo: based on the category, the data is mapped here from differnt keys in the store */}
         <Box
-          border={"1px solid red"}
+          border={"1px solid re"}
           display={"grid"}
           mt={{ base: "10px", sm: "20px", md: "30px", lg: "50px" }}
           gap={{ base: "10px", sm: "20px", md: "20px", lg: "50px" }}
