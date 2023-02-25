@@ -12,6 +12,7 @@ import Wishlist from "../Pages/Wishlist";
 import AddProducts from "../AdminPages/AddProducts";
 import MensJeans from '../Pages/MensJeans';
 import {Cart} from '../Pages/CartPages/Cart'
+import {Address} from '../Pages/CartPages/Address'
 
 
 
@@ -33,6 +34,8 @@ const AllRoutes = () => {
       < Route path="/otp" element={< Otp />} />
       < Route path="/wishlist" element={< Wishlist />} />
       <Route path='/cart' element={<Cart/>}/>
+      <Route path='/address' element={<Address/>}/>
+
     </Routes >
   );
 };

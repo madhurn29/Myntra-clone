@@ -27,7 +27,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 
-
 export const CartProductItem = ({
   id,
   quantity,
@@ -41,7 +40,7 @@ export const CartProductItem = ({
   handleCartProducts,
   setTotalAmount,
   setTotalMRP,
-  setTotalMRPDiscount,  
+  setTotalMRPDiscount,
   currentSize,
 }) => {
   const { mrp, discount, sp } = price;
@@ -50,7 +49,7 @@ export const CartProductItem = ({
   const [currentQty, setCurrentQty] = useState(1);
   const toast = useToast();
 
-  const REACT_APP_MYNTRA_API = "https://easy-gray-wasp-yoke.cyclic.app/";
+  const REACT_APP_MYNTRA_API = "https://myntra-api-mfh1.onrender.com/";
 
   //   take care of size
   const handleSize = (e) => {
@@ -69,10 +68,11 @@ export const CartProductItem = ({
   const handleQty = (e) => {
     e = e.target.value;
     setTotalMRP((prev) => prev + mrp * (e - currentQty));
+    // console.log
     setTotalMRPDiscount(
       (prev) => prev + mrp * (e - currentQty) - sp * (e - currentQty)
     );
-    setTotalAmount((prev) => prev + price * (e - currentQty));
+    setTotalAmount((prev) => prev + sp * (e - currentQty));
     setCurrentQty(e);
   };
   //   take care of price
