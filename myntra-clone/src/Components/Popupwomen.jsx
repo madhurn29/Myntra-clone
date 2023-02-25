@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import styles from "../styles/popupWomen.module.css";
+import { Link as RouterLink } from "react-router-dom";
 
 const Head = ({ color, title }) => {
     return <li className={styles.item} style={{ color, fontWeight: "bold", paddingTop: "20px" }}>{title}</li>;
@@ -19,7 +20,9 @@ const Popupwomen = ({ isVisible }) => {
                     <ul className={styles.list}>
 
                         <Head color="pink" title="Indian & Fusion Wear" />
-                        <li className={styles.item}>Kurtas & Suits</li>
+                        <RouterLink to="/womens-kurta">
+                            <li className={styles.item}>Kurtas & Suits</li>
+                        </RouterLink>
                         <li className={styles.item}>Kurtis, Tunics & Tops </li>
                         <li className={styles.item}>Ethnic Wear</li>
                         <li className={styles.item}>Sweatshirts</li>
@@ -38,8 +41,10 @@ const Popupwomen = ({ isVisible }) => {
                     <ul className={styles.list}>
 
                         <Head color="pink" title="Western Wear" />
+                        <RouterLink to="/womens-top">
+                            <li className={styles.item}>Tops</li>
+                        </RouterLink>
                         <li className={styles.item}>Dresses</li>
-                        <li className={styles.item}>Tops</li>
                         <li className={styles.item}>Tshirts</li>
                         <li className={styles.item}>Shorts & Skirts</li>
                         <li className={styles.item}>Trousers & Capris</li>

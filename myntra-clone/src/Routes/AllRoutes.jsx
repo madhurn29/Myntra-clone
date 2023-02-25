@@ -12,6 +12,11 @@ import AddProducts from "../AdminPages/AddProducts";
 import MensJeans from "../Pages/MensJeans";
 import { Cart } from "../Pages/CartPages/Cart";
 import Dashboard from "../AdminPages/Dashboard";
+import MensTshirt from "../Pages/MensTshirt";
+import WomensKurta from "../Pages/WomensKurta";
+import WomensTop from "../Pages/WomensTop";
+import ProductDetail from "../Pages/ProductDetail";
+import {Address} from '../Pages/CartPages/Address'
 
 const AllRoutes = () => {
   return (
@@ -28,7 +33,14 @@ const AllRoutes = () => {
       <Route path="/otp" element={<Otp />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/cart" element={<Cart />} />
-    </Routes>
+      <Route path="/mens-tshirts" element={<MensTshirt />} />
+      <Route path="/womens-kurta" element={<WomensKurta />} />
+      <Route path="/womens-top" element={<WomensTop />} />
+      < Route path="/single-products/:id" element={< ProductDetail />} />
+      < Route path="/store/:id" element={< EditProducts />} />
+      <Route path='/address' element={<Address/>}/>
+    </Routes >
+
   );
 };
 

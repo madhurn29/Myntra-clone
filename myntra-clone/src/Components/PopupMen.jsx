@@ -19,7 +19,9 @@ const PopupMen = ({ isVisible }) => {
                 <div onMouseEnter={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)} className={(isVisible || mouseOver) ? styles.innerContainer : styles.displayNone}>
                     <ul className={styles.list}>
                         <Head color="red" title="Topware" />
-                        <li className={styles.item}>T-Shirts</li>
+                        <RouterLink to="/mens-tshirts">
+                            <li className={styles.item}>T-Shirts</li>
+                        </RouterLink>
                         <li className={styles.item}>Casual Shirts </li>
                         <li className={styles.item}>Formal Shirts</li>
                         <li className={styles.item}>Sweatshirts</li>

@@ -3,7 +3,7 @@ import { HStack, Box, Image, Divider, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 // import logo from "";
 
-export const CartNavbar = () => {
+export const CartNavbar = ({color,addressColor}) => {
   const navigate = useNavigate();
 
   return (
@@ -30,7 +30,7 @@ export const CartNavbar = () => {
                 <Text
                   fontFamily={"Helvetica,Arial,sans-serif"}
                   fontWeight={600}
-                  color="#20bd99"
+                  color={color}
                   borderBottom={"3px solid"}
                   letterSpacing="3px"
                   fontSize={"13px"}
@@ -46,7 +46,7 @@ export const CartNavbar = () => {
                 <Text
                   fontFamily={"Helvetica,Arial,sans-serif"}
                   fontWeight={600}
-                  color="#696b79"
+                  color={addressColor}
                   borderBottom={"3px solid"}
                   letterSpacing="3px"
                   fontSize={"13px"}
