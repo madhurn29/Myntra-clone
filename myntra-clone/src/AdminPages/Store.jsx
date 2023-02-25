@@ -10,8 +10,12 @@ import React, { useEffect, useState } from "react";
 import AdminSidebar from "../Components/AdminSidebar";
 import Product_card_store from "../Components/Product_card_store";
 import { useDispatch, useSelector } from "react-redux";
-import { getRequestforAdminSide } from "../Redux/AdminReducer/action";
+import {
+  deleteRequest,
+  getRequestforAdminSide,
+} from "../Redux/AdminReducer/action";
 import { useSearchParams } from "react-router-dom";
+import AdminProductCardSkeleton from "../Components/AdminProductCardSkeleton";
 
 const mensJeansBrand = [
   {
@@ -76,6 +80,8 @@ const womensTopBrand = [
   { text: "Tokyo Talkies", value: "Tokyo Talkies" },
   { text: "Vero Moda", value: "Vero Moda" },
 ];
+
+const arr = new Array(20).fill(0);
 function Store() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialCategory = searchParams.get("category");
@@ -89,7 +95,11 @@ function Store() {
 
   const [price, setPrice] = useState(initialPriceRange);
   const dispatch = useDispatch();
+  const isLoading = useSelector((store) => {
+    return store.AdminReducer.isLoading;
+  });
 
+  console.log(isLoading, "store");
   //* created different stores as my path to fetch data is different
   const mensJeans = useSelector((store) => {
     return store.AdminReducer.mens_jeans;
@@ -120,6 +130,13 @@ function Store() {
 
   const handlePriceRange = (e) => {
     setPrice(e.target.value);
+  };
+
+  const handleDelete = (id, linkCategory) => {
+    console.log("hi", id, linkCategory);
+    dispatch(deleteRequest(id, linkCategory)).then((Res) => {
+      dispatch(getRequestforAdminSide({}, linkCategory));
+    });
   };
 
   useEffect(() => {
@@ -254,6 +271,10 @@ function Store() {
             lg: "repeat(5,1fr)",
           }}
         >
+          {isLoading &&
+            arr.map((item) => {
+              return <AdminProductCardSkeleton />;
+            })}
           {mensJeans &&
             category == "men-jeans" &&
             mensJeans?.map((item) => {
@@ -261,6 +282,7 @@ function Store() {
                 <Product_card_store
                   key={item.id}
                   {...item}
+                  handleDelete={handleDelete}
                   linkCategory={category}
                   category={"menJeans"}
                 />
@@ -272,6 +294,7 @@ function Store() {
             mensTshirt?.map((item) => {
               return (
                 <Product_card_store
+                  handleDelete={handleDelete}
                   key={item.id}
                   {...item}
                   linkCategory={category}
@@ -287,6 +310,7 @@ function Store() {
                 <Product_card_store
                   key={item.id}
                   {...item}
+                  handleDelete={handleDelete}
                   linkCategory={category}
                   category={"womensKurtas"}
                 />
@@ -299,6 +323,7 @@ function Store() {
                 <Product_card_store
                   key={item.id}
                   {...item}
+                  handleDelete={handleDelete}
                   linkCategory={category}
                   category={"womensTops"}
                 />

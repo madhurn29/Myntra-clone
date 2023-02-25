@@ -19,6 +19,7 @@ export const reducer = (state = initialState, action) => {
   const { type, payload, category } = action;
   switch (type) {
     case GET_REQUEST_ADMIN_SIDE: {
+      console.log("GET_REQUEST_ADMIN_SIDE");
       return {
         ...state,
         isLoading: true,
