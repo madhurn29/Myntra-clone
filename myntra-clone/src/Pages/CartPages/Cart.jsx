@@ -48,27 +48,40 @@ import axios from "axios";
 export const Cart = () => {
   const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
-  const [addressDetail, setAddress] = useState([]);
-  const { name, mobileNo, pincode, area, town, city, state } = addressDetail;
+  const [addressDetail, setAddress] = useState({});
+  const { name, mobileNo, pinCode, area, town, city, state } = addressDetail;
   const [totalMRP, setTotalMRP] = useState(0);
   const [totalMRPDiscount, setTotalMRPDiscount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(totalMRP - totalMRPDiscount);
-  // const Products = useSelector((store) => store.AppReducer.Products);
-  const toast = useToast();
-  const { isOpen, onOpen, onClose } = useDisclosure;
 
-  useEffect(()=>{
-    axios({
-      url:REACT_APP_MYNTRA_API+"Address"
-    }).then(({data})=>setAddress(data))
-  },[])
-  console.log(cartProducts);
+  localStorage.setItem("newAddress", JSON.stringify(addressDetail));
+  localStorage.setItem("markedPrice", JSON.stringify(totalMRP));
+  localStorage.setItem("discount", JSON.stringify(totalMRPDiscount));
+  localStorage.setItem("price", JSON.stringify(totalAmount));
+  // const Products = useSelector((store) => store.AppReducer.Products);
+  // const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure;
+  const REACT_APP_MYNTRA_API = "https://myntra-api-mfh1.onrender.com/";
+
+  // const [cartColor, setColor] = useState("#696b79");
+
+  // useEffect(() => {
+  //   // change the color to red only on initial page load
+  //   setColor("#20bd99");
+  // }, []);
+
+  // useEffect(() => {
+  //   axios({
+  //     url: REACT_APP_MYNTRA_API + "Address",
+  //   }).then(({ data }) => setAddress(data));
+  // }, []);
+  // console.log(cartProducts);
   // HANDLE CART PRODUCTS
 
   useEffect(() => {
     handleCartProducts();
   }, [cartProducts.length]);
-  const REACT_APP_MYNTRA_API = "https://easy-gray-wasp-yoke.cyclic.app/";
+
   const handleCartProducts = () => {
     axios({
       method: "get",
@@ -126,7 +139,7 @@ export const Cart = () => {
 
   return (
     <VStack minH="120vh" justify={"space-between"}>
-      <CartNavbar />
+      <CartNavbar color={"#20bd99"} />
       {cartProducts.length === 0 ? (
         <Box>
           <Center>
@@ -179,11 +192,12 @@ export const Cart = () => {
                           <HStack w={"full"}>
                             <Text fontSize={"14px"}>Deliver to:</Text>
                             <Text fontSize={"14px"} fontWeight={"bold"}>
-                              {name},{pincode}
+                              {name}, {pinCode}
                             </Text>
                           </HStack>
+
                           <Text fontSize={"12px"}>
-                            {town},{area},{city},{state}
+                            {town}, {area},{city},{state}
                           </Text>
                         </VStack>
                       ) : (
@@ -196,7 +210,6 @@ export const Cart = () => {
                         </Text>
                       )}
 
-                      {/* address pop-up   */}
                       <Button
                         variant={"outline"}
                         colorScheme="pink"
@@ -475,7 +488,7 @@ export const Cart = () => {
                     totalAmount={totalAmount}
                     totalMRP={totalMRP}
                     totalMRPDiscount={totalMRPDiscount}
-                    // redirect={pinCode ? "/address" : undefined}
+                    redirect={pinCode ? "/address" : "/address"}
                   />
                 </VStack>
               </Box>
