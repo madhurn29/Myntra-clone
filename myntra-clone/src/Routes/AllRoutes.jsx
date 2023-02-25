@@ -11,19 +11,22 @@ import Signup from "../Pages/Signup";
 import Wishlist from "../Pages/Wishlist";
 import AddProducts from "../AdminPages/AddProducts";
 import MensJeans from '../Pages/MensJeans';
-import {Cart} from '../Pages/CartPages/Cart'
-
-
-
-
-
+import { Cart } from '../Pages/CartPages/Cart'
+import MensTshirt from "../Pages/MensTshirt";
+import WomensKurta from "../Pages/WomensKurta";
+import WomensTop from "../Pages/WomensTop";
+import ProductDetail from "../Pages/ProductDetail";
 
 const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/mens-jeans" element={<MensJeans />} />
+      <Route path="/mens-tshirts" element={<MensTshirt />} />
+      <Route path="/womens-kurta" element={<WomensKurta />} />
+      <Route path="/womens-top" element={<WomensTop />} />
       < Route path="/dashboard" element={< Dashboard />} />
+      < Route path="/single-products/:id" element={< ProductDetail />} />
       < Route path="/store" element={< Store />} />
       < Route path="/store/:id" element={< EditProducts />} />
       < Route path="/addproducts" element={< AddProducts />} />
@@ -32,7 +35,7 @@ const AllRoutes = () => {
       < Route path="/signup" element={< Signup />} />
       < Route path="/otp" element={< Otp />} />
       < Route path="/wishlist" element={< Wishlist />} />
-      <Route path='/cart' element={<Cart/>}/>
+      <Route path='/cart' element={<Cart />} />
     </Routes >
   );
 };
