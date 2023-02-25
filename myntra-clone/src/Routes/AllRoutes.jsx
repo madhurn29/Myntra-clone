@@ -16,6 +16,10 @@ import MensTshirt from "../Pages/MensTshirt";
 import WomensKurta from "../Pages/WomensKurta";
 import WomensTop from "../Pages/WomensTop";
 import ProductDetail from "../Pages/ProductDetail";
+import {Address} from '../Pages/CartPages/Address'
+
+
+
 
 const AllRoutes = () => {
   return (
@@ -36,6 +40,8 @@ const AllRoutes = () => {
       < Route path="/otp" element={< Otp />} />
       < Route path="/wishlist" element={< Wishlist />} />
       <Route path='/cart' element={<Cart />} />
+      <Route path='/address' element={<Address/>}/>
+
     </Routes >
   );
 };
