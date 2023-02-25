@@ -9,17 +9,15 @@ import {
   FormLabel,
   Image,
   Input,
-  Spacer,
+
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AdminSidebar from "../Components/AdminSidebar";
-import {
-  getRequestforAdminSide,
-  patchRequestforAdminSide,
-} from "../Redux/AdminReducer/action";
+import { patchRequestforAdminSide } from "../Redux/AdminReducer/action";
 
 const initilalData = {
   id: "",
@@ -41,7 +39,7 @@ function EditProducts() {
   const param = useParams();
   const [show, setShow] = useState(false);
   const [data, setData] = useState(initilalData);
-
+  const toast = useToast();
   const {
     name,
     price,
@@ -51,6 +49,7 @@ function EditProducts() {
 
     quantity,
   } = data;
+
   const dispatch = useDispatch();
   const mensJeans = useSelector((store) => {
     return store.AdminReducer.mens_jeans;
@@ -67,6 +66,14 @@ function EditProducts() {
   const womensTops = useSelector((store) => {
     return store.AdminReducer.womens_tops;
   });
+
+  const callToast = () => {
+    toast({
+      title: "Details changed successfully",
+      position: "top",
+      isClosable: true,
+    });
+  };
 
   let paramsid = param.id;
   let [category, id] = paramsid.split("-");
@@ -107,12 +114,20 @@ function EditProducts() {
     // console.log(data,+id);
     if (category === "menJeans") {
       dispatch(patchRequestforAdminSide(id, "men-jeans", data));
+    } else if (category === "mensTshirt") {
+      dispatch(patchRequestforAdminSide(id, "men-t-shirts", data));
+    } else if (category === "womensKurtas") {
+      dispatch(patchRequestforAdminSide(id, "women-kurtas-suits", data));
+    } else if (category === "womensTops") {
+      dispatch(patchRequestforAdminSide(id, "women-tops", data));
     }
+    callToast();
+    setShow((prev) => !prev);
   };
   return (
-    <AdminSidebar>
+    <AdminSidebar heading={"Edit Product"}>
       <Box border={"1px solid re"}>
-      <Box>
+        <Box>
           <Breadcrumb
             spacing="8px"
             separator={<ChevronRightIcon color="gray.500" />}
@@ -245,14 +260,3 @@ function EditProducts() {
 }
 
 export default EditProducts;
-//   useEffect(() => {
-//     console.log(category, "44444444444444444444");
-//     let newCategory = "";
-//     if (category === "menJeans") {
-//         console.log("from if")
-//       newCategory = "men-jeans";
-//     }
-//     dispatch(getRequestforAdminSide({}, newCategory));
-//   }, []);
-
-// console.log(mensJeans)

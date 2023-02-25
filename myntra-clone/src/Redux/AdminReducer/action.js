@@ -47,28 +47,55 @@ export const patchRequestFailureAdminSide = () => {
   };
 };
 export const getRequestforAdminSide = (params, category) => (dispatch) => {
-  dispatch(getRequestAdmin);
+  dispatch(getRequestAdmin());
   axios
-    .get(`https://easy-gray-wasp-yoke.cyclic.app/${category}`, { params })
+    .get(`https://myntra-api-mfh1.onrender.com/${category}`, { params })
     .then((res) => {
       dispatch(getRequestSuccessAdminSide(res.data, category));
       //   console.log(res.data);
     })
     .catch((err) => {
-      dispatch(getRequestFailureAdminSide);
+      dispatch(getRequestFailureAdminSide());
     });
 };
 
 export const patchRequestforAdminSide = (id, category, obj) => (dispatch) => {
   dispatch(patchRequestAdminSide);
 
-  console.log(id, category, obj,"from action");
+  console.log(id, category, obj, "from action");
   axios
-    .patch(`https://easy-gray-wasp-yoke.cyclic.app/${category}/${id}`, obj)
+    .patch(`https://myntra-api-mfh1.onrender.com/${category}/${id}`, obj)
     .then((res) => {
-      dispatch(patchRequestSuccessAdminSide);
+      dispatch(patchRequestSuccessAdminSide());
     })
     .catch((err) => {
-      dispatch(patchRequestFailureAdminSide);
+      dispatch(patchRequestFailureAdminSide());
+    });
+};
+
+export const deleteRequest = (id, category) => (dispatch) => {
+  dispatch(getRequestAdmin());
+  return axios
+    .delete(`https://myntra-api-mfh1.onrender.com/${category}/${id}`)
+    .then((response) => {
+      //as we are not expecting amy data so this will be same as patch request..
+      dispatch(patchRequestSuccessAdminSide());
+    })
+    .catch((err) => {
+      dispatch(patchRequestFailureAdminSide());
+    });
+};
+
+export const postRequestAdminSide = (category, data) => (dispatch) => {
+  dispatch(getRequestAdmin);
+  console.log("action", category, data);
+  axios
+    .post(`https://myntra-api-mfh1.onrender.com/${category}`, data)
+    .then((res) => {
+      console.log(res);
+      dispatch(patchRequestSuccessAdminSide());
+    })
+    .then((err) => {
+      dispatch(patchRequestFailureAdminSide());
     });
 };
