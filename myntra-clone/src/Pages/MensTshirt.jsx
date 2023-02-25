@@ -5,16 +5,11 @@ import Navbar from '../Components/Navbar'
 import ProductCard from '../Components/ProductCard'
 import { useSelector, useDispatch } from "react-redux"
 import { getRequestforAdminSide } from '../Redux/AdminReducer/action'
-import Loading from '../Components/Loading'
 
-const MensJeans = () => {
+const MensTshirt = () => {
 
-    const isLoading = useSelector((store) => {
-        return store.AdminReducer.isLoading;
-    })
-
-    const mensJeans = useSelector((store) => {
-        return store.AdminReducer.mens_jeans;
+    const mensTshirt = useSelector((store) => {
+        return store.AdminReducer.mens_tshirt;
     });
     const dispatch = useDispatch();
 
@@ -22,21 +17,21 @@ const MensJeans = () => {
 
     }
 
-    let category = "men-jeans"
+    let category = "men-t-shirts"
 
     useEffect(() => {
         dispatch(getRequestforAdminSide(obj, category));
     }, []);
 
-    // console.log('mensJeans:', mensJeans);
+    // console.log('mensTshirt:', mensTshirt);
 
     return (
         <div>
             <Navbar />
 
             <Box padding={"10px 0px 0px 20px"} w="100%" display="flex" gap={"5px"}>
-                <Text>Home / Clothing / Jeans / </Text>
-                <Text fontWeight={700}>Jeans For Men </Text>
+                <Text>Home / Clothing / T-Shirts / </Text>
+                <Text fontWeight={700}>T-Shirts For Men </Text>
             </Box>
 
             <Box padding={"10px 0px 0px 20px"} w="100%" display="flex" gap={"5px"}>
@@ -67,18 +62,12 @@ const MensJeans = () => {
                 {/* Products Card */}
                 <Box w="80%" h="auto" border={"1px solid gray"}>
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4, xl: 4, "2xl": 4 }} spacing={8} >
-                        {mensJeans.map((el) => {
-                            return isLoading ? (
-                                <Loading {...el} />
-                            ) : (
-                                <Box key={el.id}>
-                                    <ProductCard category="menJeans" {...el} />
-                                </Box>
-
-                            )
+                        {mensTshirt.map((el) => {
+                            return <Box key={el.id}>
+                                <ProductCard category={"mensTshirt"} {...el} />
+                            </Box>
                         })}
                     </SimpleGrid>
-
                 </Box>
             </Box>
 
@@ -87,4 +76,4 @@ const MensJeans = () => {
     )
 }
 
-export default MensJeans
+export default MensTshirt
