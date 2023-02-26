@@ -3,18 +3,21 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { BiStar } from 'react-icons/bi';
+import { addTocartData, getRequestforAdminSide } from "../Redux/AdminReducer/action.js"
+import CartToast from '../Components/CartToast'
+
+
 
 
 const ProductDetail = () => {
 
-
     let ParamsIdCateg = useParams();
     let params = ParamsIdCateg.id
     let [id, category] = params.split("-");
-
     const [data, setData] = useState({});
+    const dispatch = useDispatch();
 
     const mensJeans = useSelector((store) => store.AdminReducer.mens_jeans);
     const mensTshirt = useSelector((store) => store.AdminReducer.mens_tshirt);
@@ -22,28 +25,52 @@ const ProductDetail = () => {
     const womensTops = useSelector((store) => store.AdminReducer.womens_tops);
 
 
+    const { name, product_details, customer_rating, price, sizes, images, } = data
+
+
+
+    const handleAddToCart = () => {
+        let obj = { name, product_details, customer_rating, price, sizes, images, "quantity": 1 }
+        // console.log('obj:', obj);
+        dispatch(addTocartData(obj));
+        // console.log('data:', data);
+    };
+
     useEffect(() => {
-        if (category === "menJeans") {
+        if (mensJeans.length == 0) {
+            dispatch(getRequestforAdminSide({}, "men-jeans"));
+            // console.log(mensJeans);
+        } else if (mensTshirt.length == 0) {
+            dispatch(getRequestforAdminSide({}, "men-t-shirts"));
+        } else if (womensKurtas.length == 0) {
+            dispatch(getRequestforAdminSide({}, "women-kurtas-suits"));
+        } else if (womensTops.length == 0) {
+            dispatch(getRequestforAdminSide({}, "women-tops"));
+        }
+    }, [mensJeans, mensTshirt, womensKurtas, womensTops]);
+
+    useEffect(() => {
+        if (category === "menJeans" && mensJeans.length > 0) {
             let productData = mensJeans.find((el) => el.id === +id);
             setData(productData);
         }
-        if (category === "mensTshirt") {
+
+        if (category === "mensTshirt" && mensTshirt.length > 0) {
             let productData = mensTshirt.find((el) => el.id === +id);
             setData(productData);
         }
-        if (category === "womensKurtas") {
+        if (category === "womensKurtas" && womensKurtas.length > 0) {
             let productData = womensKurtas.find((el) => el.id === +id);
             setData(productData);
         }
-        if (category === "womensTops") {
+        if (category === "womensTops" && womensTops.length > 0) {
             let productData = womensTops.find((el) => el.id === +id);
-            console.log('productData:', productData);
             setData(productData);
         }
-    }, []);
+    }, [mensJeans, mensTshirt, womensKurtas, womensTops]);
 
-    const { name, product_details, customer_rating, price, sizes, images } = data
     // console.log('data:', data)
+
 
 
     return (
@@ -92,16 +119,21 @@ const ProductDetail = () => {
                     <Box margin="10px" gap="5px">
                         <FormLabel fontSize={"20px"} fontWeight={700}>Select Sizes</FormLabel>
                         <Select w="100px">
-                            {sizes && sizes.map((el) => (
-                                <option value={el}>{el}</option>
+                            {sizes && sizes.map((el, i) => (
+                                <option key={i} value={el}>{el}</option>
                             ))}
                         </Select>
                     </Box>
 
 
                     <Box margin="10px" display={"flex"} gap="20px">
-                        <Button colorScheme={'pink'} size="lg">ADD TO BAG</Button>
-                        <Button colorScheme={'pink'} size="lg" variant={"outline"}>ADD TO WISHLIST</Button>
+                        <Box>
+                            <CartToast handleAddToCart={handleAddToCart} />
+                            {/* <Button onClick={handleAddToCart} colorScheme={'pink'} size="lg">ADD TO BAG</Button> */}
+                        </Box>
+                        <Box>
+                            <Button colorScheme={'pink'} size="lg" variant={"outline"}>ADD TO WISHLIST</Button>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
@@ -114,10 +146,3 @@ const ProductDetail = () => {
 export default ProductDetail
 
 
-//
-
-
-
-
-
-// 

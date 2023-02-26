@@ -1,7 +1,7 @@
 import * as types from "./actionTypes";
 
 const initialState = {
-  isAuth: JSON.parse(localStorage.getItem("isAuth"))||false,
+  isAuth: JSON.parse(localStorage.getItem("isAuth")) || false,
   isLoading: false,
   isError: false,
 };
@@ -9,6 +9,7 @@ const initialState = {
 export const reducer = (state = initialState, { type }) => {
   switch (type) {
     case types.GET_LOGIN_REQUEST:
+      console.log("isloading")
       return {
         ...state,
         isLoading: true,
@@ -22,7 +23,12 @@ export const reducer = (state = initialState, { type }) => {
         isLoading: false,
         isAuth: true,
       };
-
+    case types.GET_LOGIN_HALTED:
+      return {
+        ...state,
+        isLoading: false,
+        isAuth: false,
+      };
     case types.GET_LOGOUT_SUCCESS:
       localStorage.setItem("isAuth", false);
 
@@ -43,5 +49,3 @@ export const reducer = (state = initialState, { type }) => {
       return state;
   }
 };
-
-

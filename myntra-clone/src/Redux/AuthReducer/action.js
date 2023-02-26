@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as types from "./actionTypes";
 
 export const login = (logout) => (dispatch) => {
@@ -10,4 +11,36 @@ export const login = (logout) => (dispatch) => {
   } catch (error) {
     dispatch({ type: types.GET_LOGIN_FAILURE });
   }
+};
+
+export const loginRequest = (number) => (dispatch) => {
+  dispatch({ type: types.GET_LOGIN_REQUEST });
+  return axios
+    .get(`https://myntra-api-mfh1.onrender.com/users?mobile=${number}`)
+    .then((res) => {
+      console.log(res.data, "from login");
+      if (res.data.length > 0) {
+        dispatch({ type: types.GET_LOGIN_SUCCESS });
+      } else {
+        dispatch({ type: types.GET_LOGIN_HALTED });
+      }
+      return res.data;
+    })
+    .catch((err) => {
+      dispatch({ type: types.GET_LOGIN_FAILURE });
+      return err;
+    });
+};
+
+export const postLoginRequest = (obj) => (dispatch) => {
+  dispatch({ type: types.GET_LOGIN_REQUEST });
+  return axios
+    .post("https://myntra-api-mfh1.onrender.com/users", obj)
+    .then((res) => {
+      dispatch({ type: types.GET_LOGIN_SUCCESS });
+    })
+    .catch((err) => {
+      dispatch({ type: types.GET_LOGIN_FAILURE });
+      return err;
+    });
 };
