@@ -43,6 +43,7 @@ function SignupForm() {
   const { firstname, lastname, password, mobile, gender } = form;
   const [mbNumber, setMbNumber] = useState(false);
   const comingFrom = location?.state || "/";
+  console.log('comingFrom:', comingFrom)
   const toast = useToast();
 
   const isLoading = useSelector((store) => {
@@ -55,7 +56,7 @@ function SignupForm() {
       let nmbr = JSON.parse(localStorage.getItem("MbNumber")) || false;
 
       if (!nmbr) {
-        navigate("/login", { state: comingFrom, replace: true });
+        navigate("/signup", { state: comingFrom, replace: true });
       } else {
         setMbNumber(nmbr);
       }
@@ -102,7 +103,7 @@ function SignupForm() {
       });
     } else {
       dispatch(postLoginRequest(form)).then((res) => {
-        navigate("/");
+        navigate("/cart");
       });
     }
 
@@ -130,6 +131,7 @@ function SignupForm() {
                     <Text> {mbNumber} </Text>
                   </Box>
                   <Input
+                    type={"password"}
                     mt={"15px"}
                     p={"15px 10px"}
                     focusBorderColor="#f72a2a"
@@ -192,8 +194,8 @@ function SignupForm() {
                       fontSize={"12px"}
                       type="tel"
                       placeholder="Alternate Mobile Number (Optional)"
-                      //   value={input}
-                      //   onChange={handleInputChange}
+                    //   value={input}
+                    //   onChange={handleInputChange}
                     />
                   </InputGroup>
                   <FormHelperText fontSize={"10px"}>

@@ -3,12 +3,12 @@ import { HStack, Box, Image, Divider, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 // import logo from "";
 
-export const CartNavbar = ({color,addressColor,paymentColor}) => {
+export const CartNavbar = ({ color, addressColor, paymentColor }) => {
   const navigate = useNavigate();
 
   return (
     <>
-      <Box w="full">
+      <Box w="full" mt={"20px"}>
         <HStack
           width={"full"}
           justify="space-between"
@@ -16,13 +16,7 @@ export const CartNavbar = ({color,addressColor,paymentColor}) => {
           borderBottom={"1px solid #f7f7f8"}
         >
           <Box onClick={() => navigate("/")}>
-            <Image
-              w="100px"
-              alt="logo"
-              // fallbackSrc={logo}
-              cursor="pointer"
-              // src={logo}
-            ></Image>
+            <Image cursor={"pointer"} marginLeft={"30px"} w="50px" h="50px" src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png" />
           </Box>
           <Box width={"340px"}>
             <HStack>

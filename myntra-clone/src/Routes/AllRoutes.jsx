@@ -16,10 +16,11 @@ import MensTshirt from "../Pages/MensTshirt";
 import WomensKurta from "../Pages/WomensKurta";
 import WomensTop from "../Pages/WomensTop";
 import ProductDetail from "../Pages/ProductDetail";
-import {Address} from '../Pages/CartPages/Address'
+import { Address } from '../Pages/CartPages/Address'
 import { OrderConfirmPage } from "../Pages/CartPages/OrderConfirmPage";
 import { PaymentPage } from "../Pages/CartPages/PaymentPage";
 import SignupForm from "../Pages/SignupForm";
+import PrivateRoute from "./PrivateRoutes";
 
 const AllRoutes = () => {
   return (
@@ -35,16 +36,29 @@ const AllRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/otp" element={<Otp />} />
       <Route path="/wishlist" element={<Wishlist />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route path="/cart" element={
+        <PrivateRoute>
+          <Cart />
+        </PrivateRoute>} />
       <Route path="/mens-tshirts" element={<MensTshirt />} />
       <Route path="/womens-kurta" element={<WomensKurta />} />
       <Route path="/womens-top" element={<WomensTop />} />
       < Route path="/single-products/:id" element={< ProductDetail />} />
       < Route path="/store/:id" element={< EditProducts />} />
-      <Route path='/address' element={<Address/>}/>
-      <Route path="/payment" element={<PaymentPage />} />
-      <Route path="/orderSuccess" element={<OrderConfirmPage />} />
-      <Route path='/signupform' element={<SignupForm/>} />
+      <Route path='/address' element={
+        <PrivateRoute>
+          <Address />
+        </PrivateRoute>} />
+      <Route path="/payment" element={
+        <PrivateRoute>
+          <PaymentPage />
+        </PrivateRoute>} />
+      <Route path="/orderSuccess" element={
+        <PrivateRoute>
+          <OrderConfirmPage />
+        </PrivateRoute>} />
+        
+      <Route path='/signupform' element={<SignupForm />} />
     </Routes >
 
   );

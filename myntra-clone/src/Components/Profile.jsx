@@ -10,12 +10,21 @@ import {
 
 } from '@chakra-ui/react'
 import { CgProfile } from 'react-icons/cg';
+import { Link } from "react-router-dom";
 
 import React from 'react'
 
 const Profile = () => {
 
-    let isLoggedIn = true;
+    let isLoggedIn = JSON.parse(localStorage.getItem("isAuth")) || false
+    let mobileNum = localStorage.getItem("MbNumber")
+    // console.log('isLoggedIn:', typeof(isLoggedIn));
+
+    const handleLogout = () => {
+        localStorage.setItem("isAuth", false);
+    }
+
+
 
     return (
         <Menu>
@@ -31,15 +40,17 @@ const Profile = () => {
                 <Box>
                     {isLoggedIn ? (
                         <Box>
-                            <Text padding={"0px 0px 0px 0px"} fontSize={"14px"} fontWeight={700} color={"#282C3F"}>Hello Umer</Text>
-                            <Text padding={"0px 0px 0px 0px"} fontSize={"14px"} fontWeight={700} color={"#282C3F"}>7903438621</Text>
+                            <Text padding={"0px 0px 0px 0px"} fontSize={"14px"} fontWeight={700} color={"#282C3F"}>User</Text>
+                            <Text padding={"0px 0px 0px 0px"} fontSize={"14px"} fontWeight={700} color={"#282C3F"}>{mobileNum}</Text>
                             <Divider></Divider>
                         </Box>
                     ) : (
                         <Box>
                             <Text padding={"3px 3px 3px 0px"} fontSize={"14px"} fontWeight={700} color={"#3e4152"}>Welcome</Text>
                             <Text padding={"3px 3px 3px 0px"} fontSize={"13px"} color={"#282C3F"}>To access account and manage orders</Text>
-                            <Button borderRadius={"0px"} height={"40px"} size="md" colorScheme={"pink"} variant="outline">LOGIN/SIGNUP</Button>
+                            <Link to="/signup">
+                                <Button borderRadius={"0px"} height={"40px"} size="md" colorScheme={"pink"} variant="outline">LOGIN/SIGNUP</Button>
+                            </Link>
                             <Divider padding={"3px 0px 3px 0px"}></Divider>
                         </Box>
                     )}
@@ -60,7 +71,8 @@ const Profile = () => {
                 <Divider padding={"3px 0px 3px 0px"}></Divider>
 
                 <MenuItem fontSize={"13px"}>Edit Profile</MenuItem>
-                <MenuItem fontSize={"13px"}>Logout</MenuItem>
+
+                <MenuItem onClick={handleLogout} fontSize={"13px"}>Logout</MenuItem>
 
 
 
