@@ -17,16 +17,16 @@ const Loading = ({ images, sizes, customer_rating, price, name, brand_name }) =>
 
     return (
         <>
-            <Skeleton  margin={"10px"} borderRadius={"4px"} className={styles.card} h="auto" w="210px"
+            <Skeleton margin={"10px"} borderRadius={"4px"} className={styles.card} h="auto" w="210px"
                 onMouseOver={() => setWish(true)} onMouseOut={() => setWish(false)}>
 
                 <Box>
-                    <Image borderRadius={"4px"} onMouseOver={handleMouseHover} onMouseOut={handleMouseOut} src={img ? images[0] : images[1]} />
+                    <Image borderRadius={"4px"} onMouseOver={handleMouseHover} onMouseOut={handleMouseOut} src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/9162839/2022/7/13/e22894f7-03cc-4ea8-8916-607d4146096d1657686472746HIGHLANDERMenBlackTaperedFitMid-RiseCleanLookStretchableJean1.jpg" />
                 </Box>
 
                 <Box>
                     <Text textAlign={"center"} fontWeight={500}>
-                        {name.substring(0, 40)}...
+                        {name}...
                     </Text>
                 </Box>
 
@@ -35,16 +35,16 @@ const Loading = ({ images, sizes, customer_rating, price, name, brand_name }) =>
                         <Button fontWeight={700} borderRadius={"0px"} w="190px" colorScheme={"pink"} variant="outline">WISHLIST</Button>
                     </Box>
 
-                ) : <Text textAlign={"center"} color={"pink"} fontWeight={700} fontSize={"16px"}>Brand : {brand_name.substring(0, 15)}...</Text>}
+                ) : <Text textAlign={"center"} color={"pink"} fontWeight={700} fontSize={"16px"}>Brand : {brand_name}...</Text>}
 
                 <Box display={"flex"} gap="10px" marginLeft="10px">
-                    <Text fontSize={"14px"} color={"#282c3f"}>Sizes: {sizes[0]}</Text>
+                    <Text fontSize={"14px"} color={"#282c3f"}>Sizes: {sizes}</Text>
                     <Text fontSize={"14px"} color={"#282c3f"}>Rating: {customer_rating}</Text>
                 </Box>
 
                 <Box display={"flex"} gap="10px" marginLeft="10px">
-                    <Text color={"#282c3f"} fontWeight={700}>Rs. {price.sp}</Text>
-                    <Text padding={"3px"} fontSize={"12px"} color="gray" textDecoration={"line-through"}>Rs. {price.mrp}</Text>
+                    <Text color={"#282c3f"} fontWeight={700}>Rs. {price}</Text>
+                    <Text padding={"3px"} fontSize={"12px"} color="gray" textDecoration={"line-through"}>Rs. {price}</Text>
                 </Box>
             </Skeleton>
         </>

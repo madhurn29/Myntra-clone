@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar */}
-      <Box position={"sticky"} top="0px" zIndex={1000} margin={"auto"} display={"flex"} bg="#ffffff" className={styles.desktop_navbar} width="100%" height="80px">
+      <Box cursor={"pointer"} position={"sticky"} top="0px" zIndex={1000} margin={"auto"} display={"flex"} bg="#ffffff" className={styles.desktop_navbar} width="100%" height="80px">
         <Box display={"flex"} gap={"25px"}>
           <RouterLink to="/">
             <Box>
@@ -89,12 +89,14 @@ export default function Navbar() {
                 </Box>
                 <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>Wishlist</Text>
               </Box>
-              <Box>
-                <Box marginLeft={"5px"}>
-                  <BsHandbag size={"20px"} />
+              <RouterLink to="/cart">
+                <Box>
+                  <Box marginLeft={"5px"}>
+                    <BsHandbag size={"20px"} />
+                  </Box>
+                  <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>Bag</Text>
                 </Box>
-                <Text fontSize={"14px"} fontWeight="700" color={"#282C3F"}>Bag</Text>
-              </Box>
+              </RouterLink>
             </Flex>
           </Flex>
         </Box>
