@@ -46,6 +46,8 @@ export const patchRequestFailureAdminSide = () => {
     type: PATCH_REQUEST_FAILURE_ADMIN_SIDE,
   };
 };
+
+
 export const getRequestforAdminSide = (params, category) => (dispatch) => {
   dispatch(getRequestAdmin());
   axios
@@ -58,6 +60,8 @@ export const getRequestforAdminSide = (params, category) => (dispatch) => {
       dispatch(getRequestFailureAdminSide());
     });
 };
+
+
 
 export const patchRequestforAdminSide = (id, category, obj) => (dispatch) => {
   dispatch(patchRequestAdminSide);
@@ -98,4 +102,16 @@ export const postRequestAdminSide = (category, data) => (dispatch) => {
     .then((err) => {
       dispatch(patchRequestFailureAdminSide());
     });
+};
+
+
+export const addTocartData = (cartData) => (dispatch) => {
+  dispatch(getRequestAdmin);
+  axios.post(`https://myntra-api-mfh1.onrender.com/cart/`, cartData)
+    .then((res) => {
+      dispatch(patchRequestSuccessAdminSide());
+    })
+    .catch((err) => {
+      dispatch(patchRequestFailureAdminSide());
+    })
 };
