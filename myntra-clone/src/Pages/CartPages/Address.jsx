@@ -235,7 +235,7 @@ export const Address = () => {
                 totalAmount={totalAmount}
                 totalMRP={totalMRP}
                 totalMRPDiscount={totalMRPDiscount}
-                redirect={pinCode ? "/payment" : "/payment"}
+                redirect={pinCode ? "/payment" : undefined}
                 // redirect="/payment"
               />
               {/* ........................... */}
