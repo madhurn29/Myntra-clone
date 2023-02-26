@@ -17,6 +17,7 @@ import WomensKurta from "../Pages/WomensKurta";
 import WomensTop from "../Pages/WomensTop";
 import ProductDetail from "../Pages/ProductDetail";
 import {Address} from '../Pages/CartPages/Address'
+import SignupForm from "../Pages/SignupForm";
 
 const AllRoutes = () => {
   return (
@@ -39,6 +40,7 @@ const AllRoutes = () => {
       < Route path="/single-products/:id" element={< ProductDetail />} />
       < Route path="/store/:id" element={< EditProducts />} />
       <Route path='/address' element={<Address/>}/>
+      <Route path='/signupform' element={<SignupForm/>} />
     </Routes >
 
   );
