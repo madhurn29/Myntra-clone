@@ -19,6 +19,7 @@ import {
   MenuItem,
   MenuList,
   Spacer,
+  Image,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -30,9 +31,8 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
-import { Link,NavLink } from "react-router-dom";
-import { IconType } from "react-icons";
-import { ReactText } from "react";
+import { Link } from "react-router-dom";
+
 
 const LinkItems = [
   { name: "Dashboard", icon: FiHome, to: "/dashboard" },
@@ -86,9 +86,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        <Link to="/dashboard">
+          <Box>
+            <Image marginTop="8px" marginLeft={"30px"} w="60px" h="60px" src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png" />
+          </Box>
+        </Link>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

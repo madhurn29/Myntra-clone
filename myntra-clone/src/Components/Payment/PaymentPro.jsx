@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -77,8 +77,8 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
-import {CartFooter} from "../CartComponents/CartFooter";
-import {CartNavbar} from "../CartComponents/CartNavbar";
+import { CartFooter } from "../CartComponents/CartFooter";
+import { CartNavbar } from "../CartComponents/CartNavbar";
 
 const PaymentPro = () => {
   const navigate = useNavigate();
@@ -120,7 +120,7 @@ const PaymentPro = () => {
 
   return (
     <Container>
-       <CartNavbar paymentColor={paymentColor} />
+      <CartNavbar paymentColor={paymentColor} />
       <FullpayemntPage>
         <PaymentLeft>
           <AvailableofferDiv>
@@ -227,9 +227,9 @@ const PaymentPro = () => {
                 required
               />
               <CardName
-                placeholder="Name On card"
+                placeholder="Name On card (Ex:- John Michael)"
                 onChange={(e) => e.target.value}
-                pattern={"^[A-Za-z]{5,16}$"}
+                pattern={"^[A-Za-z ]{5,16}$"}
                 required
               />
               <ExpiryCvv>
@@ -237,7 +237,7 @@ const PaymentPro = () => {
                   type="month/year"
                   placeholder="Valid Thru (MM/YY)"
                   onChange={(e) => e.target.value}
-                  pattern={"^[0-9]{4}$"}
+                  pattern={"^(0[1-9]|1[0-2])\/?([0-9]{2})$"}
                   maxlength={4}
                   required
                 />

@@ -174,6 +174,7 @@ export const PaymentMethodsInput = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  border:1px solid gray
 `;
 
 export const CardNumber = styled.input`
@@ -181,42 +182,47 @@ export const CardNumber = styled.input`
   font-size: 12px;
   width: 100%;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  border:1px solid gray
+
+
 `;
 export const CardName = styled.input`
   padding: 10px;
   font-size: 12px;
   width: 100%;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border:1px solid gray
+
 `;
 export const ExpiryCvv = styled.div`
   display: flex;
   gap: 20px;
   width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 export const Expiry = styled.input`
+  border:1px solid gray;
   padding: 10px;
   font-size: 12px;
   width: 70%;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
+
 export const Cvv = styled.input`
+  border:1px solid gray;
   padding: 10px;
   font-size: 12px;
   width: 30%;
   border-radius: 4px;
   margin-right: 0px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 export const PayNowButton = styled.input`
+  border:1px solid gray;
   padding: 15px;
   font-size: 14px;
   margin-top: 20px;
-  width: 230px;
+  width: 100%;
   background-color: #ff3f6c;
   color: #fff;
   font-weight: 600;

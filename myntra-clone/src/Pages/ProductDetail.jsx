@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Image, Select, Text } from '@chakra-ui/react'
+import { Box, Button, FormLabel, Image, Select, Text, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Footer from '../Components/Footer'
@@ -6,7 +6,6 @@ import Navbar from '../Components/Navbar'
 import { useDispatch, useSelector } from "react-redux"
 import { BiStar } from 'react-icons/bi';
 import { addTocartData, getRequestforAdminSide } from "../Redux/AdminReducer/action.js"
-import CartToast from '../Components/CartToast'
 
 
 
@@ -18,6 +17,7 @@ const ProductDetail = () => {
     let [id, category] = params.split("-");
     const [data, setData] = useState({});
     const dispatch = useDispatch();
+    let toast = useToast();
 
     const mensJeans = useSelector((store) => store.AdminReducer.mens_jeans);
     const mensTshirt = useSelector((store) => store.AdminReducer.mens_tshirt);
@@ -30,10 +30,16 @@ const ProductDetail = () => {
 
 
     const handleAddToCart = () => {
+        toast({
+            description: "Added to your bag",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+        });
         let obj = { name, product_details, customer_rating, price, sizes, images, "quantity": 1 }
-        // console.log('obj:', obj);
         dispatch(addTocartData(obj));
-        // console.log('data:', data);
+
     };
 
     useEffect(() => {
@@ -128,8 +134,7 @@ const ProductDetail = () => {
 
                     <Box margin="10px" display={"flex"} gap="20px">
                         <Box>
-                            <CartToast handleAddToCart={handleAddToCart} />
-                            {/* <Button onClick={handleAddToCart} colorScheme={'pink'} size="lg">ADD TO BAG</Button> */}
+                            <Button onClick={handleAddToCart} colorScheme={'pink'} size="lg">ADD TO BAG</Button>
                         </Box>
                         <Box>
                             <Button colorScheme={'pink'} size="lg" variant={"outline"}>ADD TO WISHLIST</Button>

@@ -8,17 +8,7 @@ import {
   Image,
   Text,
   Icon,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
   Select,
-  border,
   useToast,
 } from "@chakra-ui/react";
 import { TbTruckReturn } from "react-icons/tb";
@@ -29,13 +19,10 @@ import { useEffect } from "react";
 
 export const CartProductItem = ({
   id,
-  quantity,
   brand_name,
   name,
   price,
   sizes,
-  customer_rating,
-  product_details,
   images,
   handleCartProducts,
   setTotalAmount,
