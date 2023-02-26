@@ -30,7 +30,7 @@ import {
   useToast,
   Stack,
 } from "@chakra-ui/react";
-
+import { Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CartNavbar } from "../../Components/CartComponents/CartNavbar";
@@ -53,6 +53,7 @@ export const Cart = () => {
   const [totalMRP, setTotalMRP] = useState(0);
   const [totalMRPDiscount, setTotalMRPDiscount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(totalMRP - totalMRPDiscount);
+  const [isLoading, setIsLoading] = useState(true);
 
   localStorage.setItem("newAddress", JSON.stringify(addressDetail));
   localStorage.setItem("markedPrice", JSON.stringify(totalMRP));
@@ -82,7 +83,23 @@ export const Cart = () => {
     handleCartProducts();
   }, [cartProducts.length]);
 
+  // const handleCartProducts = () => {
+  //   axios({
+  //     method: "get",
+  //     url: REACT_APP_MYNTRA_API + "cart",
+  //   }).then(({ data }) => {
+  //     const modifiedData = data.map((item) => {
+  //       return {
+  //         ...item,
+  //         currentSize: "", // Replace with the desired value for currentSize
+  //       };
+  //     });
+  //     setCartProducts(modifiedData);
+  //   });
+  // };
+
   const handleCartProducts = () => {
+    setIsLoading(true);
     axios({
       method: "get",
       url: REACT_APP_MYNTRA_API + "cart",
@@ -94,8 +111,24 @@ export const Cart = () => {
         };
       });
       setCartProducts(modifiedData);
+      setIsLoading(false);
     });
   };
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Spinner size="xl" color="blue.500" />
+      </div>
+    );
+  }
 
   // pop up notification if there is similar products
 
