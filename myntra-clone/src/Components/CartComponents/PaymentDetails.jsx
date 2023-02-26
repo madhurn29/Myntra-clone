@@ -8,7 +8,7 @@ const PaymentDetails1 = ( {totalMRP,totalMRPDiscount}) => {
    <>
                   <Box w="full">
                 <VStack w={"full"} align={"left"} textAlign="left">
-                  <Text fontSize={"12px"} fontWeight={"bold"} color={"#535766"}>PRICE DETAILS (2 Items)</Text>
+                  <Text fontSize={"12px"} fontWeight={"bold"} color={"#535766"}>PRICE DETAILS (Items)</Text>
                   <HStack w={"full"} justify={"space-between"}>
                     <Text fontSize={"14px"} color="#282c3f">Total MRP</Text>
                     <Text fontSize={"14px"} color="#282c3f">₹{totalMRP}</Text>

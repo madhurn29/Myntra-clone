@@ -17,6 +17,8 @@ import WomensKurta from "../Pages/WomensKurta";
 import WomensTop from "../Pages/WomensTop";
 import ProductDetail from "../Pages/ProductDetail";
 import {Address} from '../Pages/CartPages/Address'
+import { OrderConfirmPage } from "../Pages/CartPages/OrderConfirmPage";
+import { PaymentPage } from "../Pages/CartPages/PaymentPage";
 
 const AllRoutes = () => {
   return (
@@ -39,6 +41,8 @@ const AllRoutes = () => {
       < Route path="/single-products/:id" element={< ProductDetail />} />
       < Route path="/store/:id" element={< EditProducts />} />
       <Route path='/address' element={<Address/>}/>
+      <Route path="/payment" element={<PaymentPage />} />
+      <Route path="/orderSuccess" element={<OrderConfirmPage />} />
     </Routes >
 
   );

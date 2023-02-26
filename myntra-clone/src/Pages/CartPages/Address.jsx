@@ -39,6 +39,18 @@ export const Address = () => {
   const [totalMRPDiscount, setTotalMRPDiscount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
+  // for date updation
+  const [deliveryDate, setDeliveryDate] = useState();
+
+  useEffect(() => {
+    // Calculate delivery date as two days after the current date
+    const currentDate = new Date();
+    const deliveryDate = new Date(
+      currentDate.getTime() + 2 * 24 * 60 * 60 * 1000
+    );
+    setDeliveryDate(deliveryDate);
+  }, []);
+
   //   for navColor
   const [addressColor, setColor] = useState("#696b79");
 
@@ -105,10 +117,7 @@ export const Address = () => {
                 w="full"
                 align={"flex-start"}
               >
-                <HStack textAlign={"left"}>
-                  <Text fontSize={"14px"} color="#282c3f" fontWeight={"bold"}>
-                    {name}
-                  </Text>
+                <HStack textAlign={"left"} marginLeft={-5}>
                   <Tag
                     fontSize={"10px"}
                     color="#03a685"
@@ -119,6 +128,9 @@ export const Address = () => {
                     OFFICE
                   </Tag>
                 </HStack>
+                <Text fontSize={"14px"} color="#282c3f" fontWeight={"bold"}>
+                  {name}
+                </Text>
                 <VStack
                   align="flex-start"
                   fontSize={"13px"}
@@ -126,12 +138,32 @@ export const Address = () => {
                   fontWeight={"400"}
                   spacing={0}
                 >
-                  <Text>
+                  {/* <Text>
                     {town},{area}-{city}
+                    town,area-city
                   </Text>
                   <Text>
                     {city},{state} - {pinCode}
-                  </Text>
+                    city,state-pincode
+                  </Text> */}
+                  {addressDetail.town &&
+                  addressDetail.area &&
+                  addressDetail.city &&
+                  addressDetail.state &&
+                  addressDetail.pinCode ? (
+                    <React.Fragment>
+                      <Text>
+                        {addressDetail.town}, {addressDetail.area} -{" "}
+                        {addressDetail.city}
+                      </Text>
+                      <Text>
+                        {addressDetail.city}, {addressDetail.state} -{" "}
+                        {addressDetail.pinCode}
+                      </Text>
+                    </React.Fragment>
+                  ) : (
+                    <Text>Add Address</Text>
+                  )}
                 </VStack>
                 <HStack fontSize={"13px"} color="#424553">
                   <Text>Mobile:</Text>
@@ -188,7 +220,9 @@ export const Address = () => {
                 />
                 <HStack>
                   <Text>Estimated delivery by</Text>
-                  <Text fontWeight={"bold"}>10 march 2023</Text>
+                  <Text fontWeight={"bold"}>
+                    {deliveryDate && deliveryDate.toLocaleDateString()}
+                  </Text>
                 </HStack>
               </HStack>
               {/* ........................... */}
@@ -201,7 +235,7 @@ export const Address = () => {
                 totalAmount={totalAmount}
                 totalMRP={totalMRP}
                 totalMRPDiscount={totalMRPDiscount}
-                redirect={pinCode ? "/payment" : undefined}
+                redirect={pinCode ? "/payment" : "/payment"}
                 // redirect="/payment"
               />
               {/* ........................... */}
