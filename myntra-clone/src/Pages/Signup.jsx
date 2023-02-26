@@ -17,22 +17,32 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+import { loginRequest } from "../Redux/AuthReducer/action";
 
 const Signup = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
+  const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const location = useLocation();
   const comingFrom = location?.state || "/";
-  console.log(comingFrom);
+  // console.log(comingFrom);
   const handleInputChange = (e) => {
+    // console.log(e.target.value);
     setInput(e.target.value);
     if (isError) {
       setIsError(false);
     }
   };
 
+  const isLoading = useSelector((store)=>{
+    return store.AuthReducer.isLoading
+  })
+
+  console.log(isLoading)
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.length !== 10 || +input != input) {
@@ -40,7 +50,13 @@ const Signup = () => {
     } else {
       try {
         localStorage.setItem("MbNumber", +input);
-        navigate("/otp", { state: comingFrom, replace: true });
+        dispatch(loginRequest(input)).then((res) => {
+          if (res.length > 0) {
+            navigate("/otp", { state: comingFrom, replace: true });
+          } else {
+            navigate("/signupform");
+          }
+        });
       } catch (error) {
         console.log(error);
       }
@@ -50,6 +66,7 @@ const Signup = () => {
   return (
     <>
       <Box>
+        <Navbar/>
         <Center w={"full"} bgColor="#fceeea" h={"100vh"}>
           <VStack w={"420px"} spacing="0">
             <Box>
@@ -144,7 +161,7 @@ const Signup = () => {
                   type="submit"
                   onClick={handleSubmit}
                 >
-                  CONTINUE
+                  {isLoading ? "Loading..." : "CONTINUE" }
                 </Button>
               </FormControl>
 

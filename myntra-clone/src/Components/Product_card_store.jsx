@@ -1,7 +1,8 @@
 import { Box, Image, Text, Icon } from "@chakra-ui/react";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { MdDelete } from "react-icons/md";
+import { MdDelete,MdModeEdit } from "react-icons/md";
+import BackdropExample from "../AdminPages/EditModal";
 function Product_card_store({
   id,
   linkCategory,
@@ -10,7 +11,8 @@ function Product_card_store({
   images,
   name,
   price,
-  handleDelete
+  handleDelete,
+  onClick
 }) {
   //Todo: To go to edit product page, id is needed along with category , so i called 'linkCategory' and "category" as a prop here, linkCategory is the server path and category is just to get the reference of particular category so that i can filter accoridingly in edit product page
 
@@ -20,6 +22,11 @@ function Product_card_store({
 
 
   };
+
+  const handleEdit=()=>{
+    // BackdropExample()
+    alert("Hi")
+  }
   return (
     <Box _hover={{padding:"4px"}} boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px;"} cursor={"pointer"}>
       <Link to={`/store/${category}-${id}`}>
@@ -45,6 +52,15 @@ function Product_card_store({
             ({price.discount}%)
           </Text>
           <Icon as={MdDelete} onClick={() => handleDeleteClick(id, linkCategory)} />
+         <Icon as={MdModeEdit} onClick={onClick} />
+         {/* onClick={() => {
+          setOverlay(<OverlayOne />);
+          onOpen();
+        }}
+      >
+        
+      </Icon> */}
+           
         </Box>
       </Box>
     </Box>

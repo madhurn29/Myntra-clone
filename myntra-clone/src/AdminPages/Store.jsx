@@ -16,6 +16,7 @@ import {
 } from "../Redux/AdminReducer/action";
 import { useSearchParams } from "react-router-dom";
 import AdminProductCardSkeleton from "../Components/AdminProductCardSkeleton";
+// import BackdropExample from "./EditModal";
 
 const mensJeansBrand = [
   {
@@ -82,6 +83,7 @@ const womensTopBrand = [
 ];
 
 const arr = new Array(20).fill(0);
+
 function Store() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialCategory = searchParams.get("category");
@@ -99,7 +101,7 @@ function Store() {
     return store.AdminReducer.isLoading;
   });
 
-  console.log(isLoading, "store");
+  // console.log(isLoading, "store");
   //* created different stores as my path to fetch data is different
   const mensJeans = useSelector((store) => {
     return store.AdminReducer.mens_jeans;
@@ -263,7 +265,7 @@ function Store() {
           border={"1px solid re"}
           display={"grid"}
           mt={{ base: "10px", sm: "20px", md: "30px", lg: "50px" }}
-          gap={{ base: "10px", sm: "20px", md: "20px", lg: "50px" }}
+          gap={{ base: "10px", sm: "20px", md: "20px", lg: "30px" }}
           gridTemplateColumns={{
             base: "repeat(2,1fr)",
             sm: "repeat(3,1fr)",
@@ -286,6 +288,12 @@ function Store() {
                   linkCategory={category}
                   category={"menJeans"}
                 />
+                // <BackdropExample
+                //   {...item}
+                //   key={item.id}
+                //   // linkCategory={category}
+                //   handleDelete={handleDelete}
+                // />
               );
             })}
 

@@ -9,7 +9,6 @@ import {
   FormLabel,
   Image,
   Input,
-
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -17,7 +16,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AdminSidebar from "../Components/AdminSidebar";
-import { patchRequestforAdminSide } from "../Redux/AdminReducer/action";
+import {
+  getRequestforAdminSide,
+  patchRequestforAdminSide,
+} from "../Redux/AdminReducer/action";
+import BackdropExample from "./EditModal";
 
 const initilalData = {
   id: "",
@@ -39,7 +42,9 @@ function EditProducts() {
   const param = useParams();
   const [show, setShow] = useState(false);
   const [data, setData] = useState(initilalData);
+
   const toast = useToast();
+
   const {
     name,
     price,
@@ -72,29 +77,45 @@ function EditProducts() {
       title: "Details changed successfully",
       position: "top",
       isClosable: true,
+      status: "success",
     });
   };
 
   let paramsid = param.id;
   let [category, id] = paramsid.split("-");
+
   useEffect(() => {
-    if (category === "menJeans") {
+    if (mensJeans.length == 0) {
+      dispatch(getRequestforAdminSide({}, "men-jeans"));
+      console.log(mensJeans);
+    } else if (mensTshirt.length == 0) {
+      dispatch(getRequestforAdminSide({}, "men-t-shirts"));
+    } else if (womensKurtas.length == 0) {
+      dispatch(getRequestforAdminSide({}, "women-kurtas-suits"));
+    } else if (womensTops.length == 0) {
+      dispatch(getRequestforAdminSide({}, "women-tops"));
+    }
+  }, [mensJeans, mensTshirt, womensKurtas, womensTops]);
+
+  useEffect(() => {
+    if (category === "menJeans" && mensJeans.length > 0) {
       let productData = mensJeans.find((el) => el.id === +id);
       setData(productData);
     }
-    if (category === "mensTshirt") {
+
+    if (category === "mensTshirt" && mensTshirt.length > 0) {
       let productData = mensTshirt.find((el) => el.id === +id);
       setData(productData);
     }
-    if (category === "womensKurtas") {
+    if (category === "womensKurtas" && womensKurtas.length > 0) {
       let productData = womensKurtas.find((el) => el.id === +id);
       setData(productData);
     }
-    if (category === "womensTops") {
+    if (category === "womensTops" && womensTops.length > 0) {
       let productData = womensTops.find((el) => el.id === +id);
       setData(productData);
     }
-  }, []);
+  }, [mensJeans, mensTshirt, womensKurtas, womensTops]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -177,6 +198,7 @@ function EditProducts() {
               >
                 Edit Details
               </Button>
+              {/* <BackdropExample {...data} /> */}
             </Box>
           )}
 
@@ -187,6 +209,7 @@ function EditProducts() {
               p={"15px"}
               boxShadow={" rgba(0, 0, 0, 0.24) 0px 3px 8px;"}
             >
+              {/* <BackdropExample/> */}
               <FormControl width={"100%"} as={"fieldset"}>
                 <FormLabel>Title</FormLabel>
                 <Input value={name} name="name" onChange={handleChange} />
@@ -243,6 +266,7 @@ function EditProducts() {
                   >
                     Submit Changes
                   </Button>
+
                   <Button
                     onClick={() => setShow((prev) => !prev)}
                     colorScheme={"red"}

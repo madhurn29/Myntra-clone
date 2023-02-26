@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminSidebar from "../Components/AdminSidebar";
 
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -10,8 +10,42 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { getRequestforAdminSide } from "../Redux/AdminReducer/action";
 function Dashboard() {
-  console.log("dashboard");
+  const dispatch = useDispatch();
+  const [products, setTotalProducts] = useState(0);
+  const mensJeans = useSelector((store) => {
+    return store.AdminReducer.mens_jeans;
+  });
+
+  const mensTshirt = useSelector((store) => {
+    return store.AdminReducer.mens_tshirt;
+  });
+
+  const womensKurtas = useSelector((store) => {
+    return store.AdminReducer.womens_kurtas;
+  });
+
+  const womensTops = useSelector((store) => {
+    return store.AdminReducer.womens_tops;
+  });
+
+  useEffect(() => {
+    dispatch(getRequestforAdminSide({}, "men-jeans"));
+    dispatch(getRequestforAdminSide({}, "men-t-shirts"));
+    dispatch(getRequestforAdminSide({}, "women-kurtas-suits"));
+    dispatch(getRequestforAdminSide({}, "women-tops"));
+
+    setTotalProducts(
+      mensJeans.length +
+        mensTshirt.length +
+        womensKurtas.length +
+        womensTops.length
+    );
+  }, [products]);
+
+  console.log(products);
   return (
     <AdminSidebar heading={"Dashboard"}>
       <Box border={"1px solid re"}>
@@ -25,7 +59,7 @@ function Dashboard() {
             </BreadcrumbItem>
 
             <BreadcrumbItem>
-              <BreadcrumbLink href="#">Store</BreadcrumbLink>
+              <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -34,7 +68,7 @@ function Dashboard() {
       <Box>
         <Box
           mt={"25px"}
-          border={"1px solid red"}
+          border={"1px solid re"}
           display={"grid"}
           gridTemplateColumns={"repeat(3,1fr)"}
           justifyContent={"space-between"}
@@ -69,7 +103,7 @@ function Dashboard() {
               alignItems={"center"}
             >
               <Text fontSize={"2xl"}>Total Products</Text>
-              <Text fontSize={"2xl"}>2500</Text>
+              <Text fontSize={"2xl"}>114</Text>
             </Box>
           </Box>
           <Box
@@ -101,7 +135,7 @@ function Dashboard() {
               alignItems={"center"}
             >
               <Text fontSize={"2xl"}>Total Orders</Text>
-              <Text fontSize={"2xl"}>250</Text>
+              <Text fontSize={"2xl"}>2</Text>
             </Box>
           </Box>
           <Box

@@ -52,7 +52,7 @@ export const getRequestforAdminSide = (params, category) => (dispatch) => {
     .get(`https://myntra-api-mfh1.onrender.com/${category}`, { params })
     .then((res) => {
       dispatch(getRequestSuccessAdminSide(res.data, category));
-      //   console.log(res.data);
+        console.log(res.data,"from axtion");
     })
     .catch((err) => {
       dispatch(getRequestFailureAdminSide());
