@@ -3,3 +3,4 @@ Myntra is an ecommerce website which is involed in selling fashion accessiories 
 
 ## Teck stack used : Javascript React | React Redux | 
 ## Styling Libarary : Chakra UI
+Deployed link : https://myntra-clone-iota.vercel.app/
