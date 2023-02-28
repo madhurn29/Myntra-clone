@@ -8,11 +8,11 @@ import {
   VisuallyHidden,
   chakra,
   useColorModeValue,
+  Image
 } from '@chakra-ui/react';
 import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 
-// import AppStoreBadge from '@/components/AppStoreBadge';
-// import PlayStoreBadge from '@/components/PlayStoreBadge';
+
 
 const ListHeader = ({ children }) => {
   return (
@@ -52,37 +52,51 @@ const SocialButton = ({
 export default function Footer() {
   return (
     <Box
+      marginTop="50px"
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}>
-      <Container as={Stack} maxW={'6xl'} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+      <Container as={Stack} maxW={'6xl'} py={8}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
           <Stack align={'flex-start'}>
-            <ListHeader>Company</ListHeader>
-            <Link href={'#'}>About Us</Link>
-            <Link href={'#'}>Blog</Link>
-            <Link href={'#'}>Careers</Link>
-            <Link href={'#'}>Contact Us</Link>
+            <ListHeader fontSize={"12px"} fontWeight={300}>ONLINE SHOPPING</ListHeader>
+            <Link href={'#'} fontSize="15px">Men</Link>
+            <Link href={'#'} fontSize="15px">Women</Link>
+            <Link href={'#'} fontSize="15px">Kids</Link>
+            <Link href={'#'} fontSize="15px">Home &Living</Link>
+            <Link href={'#'} fontSize="15px">Beauty</Link>
+            <Link href={'#'} fontSize="15px">Gift Cards</Link>
+            <Link href={'#'} fontSize="15px">Myntra Insider</Link>
           </Stack>
 
           <Stack align={'flex-start'}>
-            <ListHeader>Support</ListHeader>
-            <Link href={'#'}>Help Center</Link>
-            <Link href={'#'}>Safety Center</Link>
-            <Link href={'#'}>Community Guidelines</Link>
+            <ListHeader fontSize={"12px"} fontWeight={300}>CUSTOMER POLICIES</ListHeader>
+            <Link href={'#'} fontSize="15px">Contact Us</Link>
+            <Link href={'#'} fontSize="15px">FAQ</Link>
+            <Link href={'#'} fontSize="15px">Terms Of Use</Link>
+            <Link href={'#'} fontSize="15px">Track Orders</Link>
+            <Link href={'#'} fontSize="15px">Shipping</Link>
+            <Link href={'#'} fontSize="15px">Cancellation</Link>
+            <Link href={'#'} fontSize="15px">Returns</Link>
+            <Link href={'#'} fontSize="15px">Privacy Policy</Link>
+            <Link href={'#'} fontSize="15px">Grievance Officer</Link>
           </Stack>
 
           <Stack align={'flex-start'}>
-            <ListHeader>Legal</ListHeader>
-            <Link href={'#'}>Cookies Policy</Link>
-            <Link href={'#'}>Privacy Policy</Link>
-            <Link href={'#'}>Terms of Service</Link>
-            <Link href={'#'}>Law Enforcement</Link>
+            <ListHeader fontSize={"12px"} fontWeight={300}>USEFULL LINK</ListHeader>
+            <Link href={'#'} fontSize="15px">Blog</Link>
+            <Link href={'#'} fontSize="15px">Carreirs</Link>
+            <Link href={'#'} fontSize="15px">Site Map</Link>
+            <Link href={'#'} fontSize="15px">Corporate Information</Link>
+            <Link href={'#'} fontSize="15px">Whitehat</Link>
+
           </Stack>
 
           <Stack align={'flex-start'}>
-            <ListHeader>Install App</ListHeader>
-            {/* <AppStoreBadge />
-            <PlayStoreBadge /> */}
+            <ListHeader fontSize={"12px"} fontWeight={300} >EXPERIENCE MYNTRA APP ON MOBILE</ListHeader>
+            <Box cursor={"pointer"} display={"flex"} gap="10px">
+              <Image href={"https://play.google.com/store/apps/details?id=com.myntra.android"} w="150px" h="42px" src="https://constant.myntassets.com/web/assets/img/80cc455a-92d2-4b5c-a038-7da0d92af33f1539674178924-google_play.png" />
+              <Image href={"https://apps.apple.com/in/app/myntra-indias-fashion-store/id907394059"} w="150px" h="42px" src="https://constant.myntassets.com/web/assets/img/bc5e11ad-0250-420a-ac71-115a57ca35d51539674178941-apple_store.png" />
+            </Box>
           </Stack>
         </SimpleGrid>
       </Container>
@@ -99,7 +113,7 @@ export default function Footer() {
           spacing={4}
           justify={{ md: 'space-between' }}
           align={{ md: 'center' }}>
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Text>In case of any concern, Contact Us</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'https://twitter.com/myntra'}>
               <FaTwitter />
@@ -113,6 +127,7 @@ export default function Footer() {
           </Stack>
         </Container>
       </Box>
+      <hr />
     </Box>
   );
 }
