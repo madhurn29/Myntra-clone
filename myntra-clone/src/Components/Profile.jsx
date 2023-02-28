@@ -22,6 +22,7 @@ const Profile = () => {
 
     const handleLogout = () => {
         localStorage.setItem("isAuth", false);
+        window.location.reload();
     }
 
 

@@ -84,11 +84,10 @@ export default function Footer() {
           <Stack align={'flex-start'}>
             <ListHeader fontSize={"12px"} fontWeight={300}>USEFULL LINK</ListHeader>
             <Link href={'#'} fontSize="15px">Blog</Link>
-            <Link href={'#'} fontSize="15px">Carreirs</Link>
+            <Link href={'#'} fontSize="15px">Careers</Link>
             <Link href={'#'} fontSize="15px">Site Map</Link>
             <Link href={'#'} fontSize="15px">Corporate Information</Link>
             <Link href={'#'} fontSize="15px">Whitehat</Link>
-
           </Stack>
 
           <Stack align={'flex-start'}>
