@@ -9,7 +9,7 @@ const initialState = {
 export const reducer = (state = initialState, { type }) => {
   switch (type) {
     case types.GET_LOGIN_REQUEST:
-      console.log("isloading")
+      console.log("isloading");
       return {
         ...state,
         isLoading: true,
@@ -37,7 +37,11 @@ export const reducer = (state = initialState, { type }) => {
         isLoading: false,
         isAuth: false,
       };
-
+    case types.ADMIN_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case types.GET_LOGIN_FAILURE:
       return {
         ...state,

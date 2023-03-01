@@ -1,14 +1,13 @@
 import { Box, Image, Text, Icon, Skeleton } from "@chakra-ui/react";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 function AdminProductCardSkeleton({
   id,
   linkCategory,
   category,
   brand_name,
-  images,
-  name,
+
   price,
   handleDelete,
 }) {

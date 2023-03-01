@@ -20,7 +20,6 @@ import {
   getRequestforAdminSide,
   patchRequestforAdminSide,
 } from "../Redux/AdminReducer/action";
-import BackdropExample from "./EditModal";
 
 const initilalData = {
   id: "",
@@ -85,14 +84,14 @@ function EditProducts() {
   let [category, id] = paramsid.split("-");
 
   useEffect(() => {
-    if (mensJeans.length == 0) {
+    if (mensJeans.length === 0) {
       dispatch(getRequestforAdminSide({}, "men-jeans"));
       console.log(mensJeans);
-    } else if (mensTshirt.length == 0) {
+    } else if (mensTshirt.length === 0) {
       dispatch(getRequestforAdminSide({}, "men-t-shirts"));
-    } else if (womensKurtas.length == 0) {
+    } else if (womensKurtas.length === 0) {
       dispatch(getRequestforAdminSide({}, "women-kurtas-suits"));
-    } else if (womensTops.length == 0) {
+    } else if (womensTops.length === 0) {
       dispatch(getRequestforAdminSide({}, "women-tops"));
     }
   }, [mensJeans, mensTshirt, womensKurtas, womensTops]);
@@ -126,7 +125,14 @@ function EditProducts() {
     } else if (name === "price.sp") {
       setData({ ...data, price: { ...price, sp: value } });
     } else {
-      setData({ ...data, [name]: value });
+      setData({
+        ...data,
+        [name]: value,
+        price: {
+          ...price,
+          discount: Math.floor(((price.mrp - price.sp) / price.mrp) * 100),
+        },
+      });
     }
   };
 

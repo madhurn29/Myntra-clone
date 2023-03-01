@@ -15,19 +15,21 @@ import {
   FormErrorMessage,
   Link as ChakraLink,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-import { loginRequest } from "../Redux/AuthReducer/action";
+import { AdminLogin, loginRequest } from "../Redux/AuthReducer/action";
 
-const Signup = () => {
+function AdminSignIn() {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const location = useLocation();
+  const toast = useToast();
   const comingFrom = location?.state || "/";
   // console.log(comingFrom);
   const handleInputChange = (e) => {
@@ -42,19 +44,23 @@ const Signup = () => {
     return store.AuthReducer.isLoading;
   });
 
-  console.log(isLoading);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.length !== 10 || +input != input) {
       setIsError(true);
     } else {
       try {
-        localStorage.setItem("MbNumber", +input);
-        dispatch(loginRequest(input)).then((res) => {
+        dispatch(AdminLogin(input)).then((res) => {
           if (res.length > 0) {
-            navigate("/otp", { state: comingFrom, replace: true });
+            navigate("/dashboard");
           } else {
-            navigate("/signupform");
+            toast({
+              position: "top",
+              title: `Sorry! You are not authorized to Login`,
+              status: "error",
+              isClosable: true,
+              duration: 2000,
+            });
           }
         });
       } catch (error) {
@@ -69,9 +75,9 @@ const Signup = () => {
         <Navbar />
         <Center w={"full"} bgColor="#fceeea" h={"100vh"}>
           <VStack w={"420px"} spacing="0">
-            <Box>
+            {/* <Box>
               <Image src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2022/9/21/8fca3ae9-d245-443b-a142-8d568247794c1663700243878-offer-banner-300-600x240-code-_-MYNTRA400.jpg" />
-            </Box>
+            </Box> */}
 
             <Box w={"100%"} p={"40px 30px 10px 30px"} bgColor="white">
               <FormControl isRequired isInvalid={isError}>
@@ -90,19 +96,7 @@ const Signup = () => {
                         fontSize="24px"
                         size="lg"
                       >
-                        Login
-                      </Heading>
-                      <Text fontSize={"18px"} color="#5a5e6d">
-                        or
-                      </Text>
-                      <Heading
-                        fontWeight={"600"}
-                        as={"h2"}
-                        color="#424553"
-                        fontSize="24px"
-                        size="lg"
-                      >
-                        Signup
+                        Admin Login
                       </Heading>
                     </HStack>
                   </Center>
@@ -177,9 +171,9 @@ const Signup = () => {
                 </ChakraLink>
               </Text>
               <Text mb={10} color={"#a7a9af"} textAlign="left">
-                Are you an Admin?{" "}
+                Are you a User?{" "}
                 <NavLink
-                  to="/adminsignin"
+                  to="/signup"
                   fontWeight={"bold"}
                   _hover={{ textDecoration: "none" }}
                   color={"#ff3f6c"}
@@ -199,6 +193,6 @@ const Signup = () => {
       </Box>
     </>
   );
-};
+}
 
-export default Signup;
+export default AdminSignIn;

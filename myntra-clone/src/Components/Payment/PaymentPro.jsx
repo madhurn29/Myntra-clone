@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import {
-  // AddressCheckoutAdd,
   AllPriceDiv,
   AvailableofferDiv,
   AvaOffer,
@@ -28,8 +23,6 @@ import {
   Dmrp,
   DmrpDiv,
   Dmrprs,
-  // DotsCheckoutAdd,
-  // DotsCheckoutP,
   Emi,
   Emidiv,
   Expiry,
@@ -44,7 +37,6 @@ import {
   NetBank,
   NetBankdiv,
   PayemntMain,
-  // PaymentCheckoutP,
   PaymentLeft,
   PaymentMethods,
   PaymentMethodsInput,
@@ -60,7 +52,6 @@ import {
   TotalPriceDiv,
   Upi,
   Upidiv,
-  // UpiIcon,
   Wallet,
   Walletdiv,
 } from "./Payment.element";
@@ -82,10 +73,6 @@ import { CartNavbar } from "../CartComponents/CartNavbar";
 
 const PaymentPro = () => {
   const navigate = useNavigate();
-  // const [creditCardNum, setCreditCardNum] = useState("#### #### #### ####");
-  // const [cardHolder, setCardHolder] = useState("Your Full Name");
-  // const [expireMonthYear, setExpireMonthYear] = useState("MM/YY");
-  // const [cvv, setCvv] = useState("CVV");
 
   const handleSubmit = (e) => {
     console.log("Hello");
@@ -237,7 +224,7 @@ const PaymentPro = () => {
                   type="month/year"
                   placeholder="Valid Thru (MM/YY)"
                   onChange={(e) => e.target.value}
-                  pattern={"^(0[1-9]|1[0-2])\/?([0-9]{2})$"}
+                  pattern={"^(0[1-9]|1[0-2])/?([0-9]{2})$"}
                   maxlength={4}
                   required
                 />
@@ -264,9 +251,7 @@ const PaymentPro = () => {
 
         <FormRightDiv>
           <AllPriceDiv>
-            <PriceDetailsT>
-              PRICE DETAILS (Items)
-            </PriceDetailsT>
+            <PriceDetailsT>PRICE DETAILS (Items)</PriceDetailsT>
             <TmrpDiv>
               <Tmrp>TOTAL MRP</Tmrp>
               <Tmrprs>₹{totalMRP}</Tmrprs>
