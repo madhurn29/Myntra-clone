@@ -93,7 +93,7 @@ function AddProducts() {
       price.mrp == "" ||
       images.length == 0 ||
       quantity == "" ||
-      rating === "" ||
+      customer_rating === "" ||
       product_details == "" ||
       category == ""
     ) {
