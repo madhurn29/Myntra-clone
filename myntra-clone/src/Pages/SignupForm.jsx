@@ -4,8 +4,6 @@ import {
   Center,
   FormControl,
   FormHelperText,
-  Heading,
-  Image,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -14,7 +12,6 @@ import {
   Stack,
   Text,
   useToast,
-  VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,10 +37,10 @@ function SignupForm() {
   const location = useLocation();
   const dispatch = useDispatch();
   const [form, setForm] = useState(initalForm);
-  const { firstname, lastname, password, mobile, gender } = form;
+  const { firstname, lastname, password, gender } = form;
   const [mbNumber, setMbNumber] = useState(false);
   const comingFrom = location?.state || "/";
-  console.log('comingFrom:', comingFrom)
+  console.log("comingFrom:", comingFrom);
   const toast = useToast();
 
   const isLoading = useSelector((store) => {
@@ -194,8 +191,8 @@ function SignupForm() {
                       fontSize={"12px"}
                       type="tel"
                       placeholder="Alternate Mobile Number (Optional)"
-                    //   value={input}
-                    //   onChange={handleInputChange}
+                      //   value={input}
+                      //   onChange={handleInputChange}
                     />
                   </InputGroup>
                   <FormHelperText fontSize={"10px"}>

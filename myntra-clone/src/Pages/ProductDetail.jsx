@@ -43,14 +43,14 @@ const ProductDetail = () => {
     };
 
     useEffect(() => {
-        if (mensJeans.length == 0) {
+        if (mensJeans.length === 0) {
             dispatch(getRequestforAdminSide({}, "men-jeans"));
             // console.log(mensJeans);
-        } else if (mensTshirt.length == 0) {
+        } else if (mensTshirt.length === 0) {
             dispatch(getRequestforAdminSide({}, "men-t-shirts"));
-        } else if (womensKurtas.length == 0) {
+        } else if (womensKurtas.length === 0) {
             dispatch(getRequestforAdminSide({}, "women-kurtas-suits"));
-        } else if (womensTops.length == 0) {
+        } else if (womensTops.length === 0) {
             dispatch(getRequestforAdminSide({}, "women-tops"));
         }
     }, [mensJeans, mensTshirt, womensKurtas, womensTops]);

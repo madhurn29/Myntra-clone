@@ -47,27 +47,23 @@ export const patchRequestFailureAdminSide = () => {
   };
 };
 
-
 export const getRequestforAdminSide = (params, category) => (dispatch) => {
   dispatch(getRequestAdmin());
   axios
     .get(`https://myntra-api-mfh1.onrender.com/${category}`, { params })
     .then((res) => {
       dispatch(getRequestSuccessAdminSide(res.data, category));
-        console.log(res.data,"from axtion");
     })
     .catch((err) => {
       dispatch(getRequestFailureAdminSide());
     });
 };
 
-
-
 export const patchRequestforAdminSide = (id, category, obj) => (dispatch) => {
   dispatch(patchRequestAdminSide);
 
   console.log(id, category, obj, "from action");
-  axios
+  return axios
     .patch(`https://myntra-api-mfh1.onrender.com/${category}/${id}`, obj)
     .then((res) => {
       dispatch(patchRequestSuccessAdminSide());
@@ -92,7 +88,6 @@ export const deleteRequest = (id, category) => (dispatch) => {
 
 export const postRequestAdminSide = (category, data) => (dispatch) => {
   dispatch(getRequestAdmin);
-  console.log("action", category, data);
   axios
     .post(`https://myntra-api-mfh1.onrender.com/${category}`, data)
     .then((res) => {
@@ -104,14 +99,14 @@ export const postRequestAdminSide = (category, data) => (dispatch) => {
     });
 };
 
-
 export const addTocartData = (cartData) => (dispatch) => {
   dispatch(getRequestAdmin);
-  axios.post(`https://myntra-api-mfh1.onrender.com/cart/`, cartData)
+  axios
+    .post(`https://myntra-api-mfh1.onrender.com/cart/`, cartData)
     .then((res) => {
       dispatch(patchRequestSuccessAdminSide());
     })
     .catch((err) => {
       dispatch(patchRequestFailureAdminSide());
-    })
+    });
 };

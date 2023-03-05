@@ -1,169 +1,215 @@
-// import {
-//   Button,
-//   Modal,
-//   ModalBody,
-//   ModalCloseButton,
-//   ModalContent,
-//   ModalFooter,
-//   ModalHeader,
-//   ModalOverlay,
-//   Text,
-//   Icon,
-//   useDisclosure,
-//   Input,
-//   FormControl,
-//   FormLabel,
-//   Box,
-// } from "@chakra-ui/react";
-// import { MdModeEdit } from "react-icons/md";
-// import React, { useEffect, useState } from "react";
-// import ProductCard from "../Components/ProductCard";
-// import Product_card_store from "../Components/Product_card_store";
-// const initilalData = {
-//   id: "",
-//   name: "",
-//   price: {
-//     mrp: "",
-//     discount: "",
-//     sp: "",
-//   },
-//   brand_name: "",
-//   sizes: [],
-//   customer_rating: "",
-//   product_details: [],
-//   images: [],
-//   quantity: "",
-// };
-// function BackdropExample(item) {
-//   const [data, setData] = useState(initilalData);
-//   const OverlayOne = () => (
-//     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-//   );
-//   const [overlay, setOverlay] = React.useState(<OverlayOne />);
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   const OverlayTwo = () => (
-//     <ModalOverlay
-//       bg="none"
-//       backdropFilter="auto"
-//       backdropInvert="80%"
-//       backdropBlur="2px"
-//     />
-//   );
-//   const {
-//     name,
-//     price,
-//     brand_name,
-//     customer_rating,
-//     product_details,
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+  Icon,
+  Input,
+  FormControl,
+  FormLabel,
+  Box,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { MdModeEdit } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRequestforAdminSide,
+  patchRequestforAdminSide,
+} from "../Redux/AdminReducer/action";
+const initilalData = {
+  id: "",
+  name: "",
+  price: {
+    mrp: "",
+    discount: "",
+    sp: "",
+  },
+  brand_name: "",
+  sizes: [],
+  customer_rating: "",
+  product_details: [],
+  images: [],
+  quantity: "",
+};
+function BackdropExample({
+  brand,
+  title,
+  desc,
+  mrpPrice,
+  SpecialPrice,
+  productRating,
+  productQuantity,
+  productImages,
+  productSizes,
+  productId,
+  productDiscount,
+  linkCategory,
+}) {
+  const [data, setData] = useState(initilalData);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((store) => {
+    return store.AdminReducer.isLoading;
+  });
 
-//     quantity,
-//   } = data;
-//   let obj = { ...data, ...item };
-//   // console.log(obj,"object");
-//   delete obj.handleDelete;
-//   useEffect(() => {
-//     setData(obj);
-//   }, []);
+  console.log(isLoading);
+  const {
+    id,
+    name,
+    price,
+    brand_name,
+    customer_rating,
+    product_details,
+    quantity,
+  } = data;
 
-//   //   <Icon  onClick={() => handleEdit()} />
+  console.log(data);
+  const OverlayOne = () => (
+    <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) " />
+  );
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     // console.log(name, value);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = React.useState(<OverlayOne />);
+  useEffect(() => {
+    setData({
+      ...data,
+      brand_name: brand,
+      name: title,
+      product_details: [desc],
+      quantity: productQuantity,
+      customer_rating: productRating,
+      sizes: productSizes,
+      images: productImages,
+      id: productId,
+      price: {
+        mrp: mrpPrice,
+        discount: productDiscount,
+        sp: SpecialPrice,
+      },
+    });
+  }, []);
 
-//     if (name === "price.mrp") {
-//       setData({ ...data, price: { ...price, mrp: value } });
-//     } else if (name === "price.sp") {
-//       setData({ ...data, price: { ...price, sp: value } });
-//     } else {
-//       setData({ ...data, [name]: value });
-//     }
-//   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "price.mrp") {
+      setData({ ...data, price: { ...price, mrp: +value } });
+    } else if (name === "images") {
+      setData({ ...data, images: [value] });
+    } else if (name === "price.sp") {
+      setData({
+        ...data,
+        price: {
+          ...price,
+          sp: +value,
+        },
+      });
+    } else {
+      setData({
+        ...data,
+        [name]: value,
+        price: {
+          ...price,
+          discount: Math.floor(((price.mrp - price.sp) / price.mrp) * 100),
+        },
+      });
+    }
+  };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log(data, "item");
-//   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(data);
+    console.log(linkCategory);
+    dispatch(patchRequestforAdminSide(id, linkCategory, data)).then((res) => {
+      dispatch(getRequestforAdminSide({}, linkCategory));
+      onClose();
+    });
+  };
 
-//   return (
-//     <>
-//       {/* <Product_card_store
-//         {...item}
-//         // handleDelete={handleDelete}
-//         onClick={() => {
-//           setOverlay(<OverlayOne />);
-//           onOpen();
-//         }}
-//       /> */}
+  return (
+    <>
+      {/* <Button
+        
+      > */}
+      <Icon
+        as={MdModeEdit}
+        onClick={() => {
+          setOverlay(<OverlayOne />);
+          onOpen();
+        }}
+      />
+      {/* </Button> */}
 
-//       <Modal isCentered isOpen={isOpen} onClose={onClose}>
-//         {overlay}
-//         <ModalContent>
-//           <ModalHeader>Modal Title</ModalHeader>
-//           <ModalCloseButton />
-//           <ModalBody>
-//             <FormControl width={"100%"} as={"fieldset"}>
-//               <FormLabel>Title</FormLabel>
-//               <Input value={name} name="name" onChange={handleChange} />
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        {overlay}
+        <ModalContent>
+          <ModalHeader>Edit Details</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl>
+              <FormLabel>Brand</FormLabel>
+              <Input
+                value={brand_name}
+                name="brand_name"
+                onChange={(e) => handleChange(e)}
+              />
+              <FormLabel>Title</FormLabel>
+              <Input
+                value={name}
+                name="name"
+                onChange={(e) => handleChange(e)}
+              />
+              <FormLabel>Description</FormLabel>
+              <Input
+                value={product_details}
+                name="product_details"
+                onChange={(e) => handleChange(e)}
+              />
+              <FormLabel>Mrp</FormLabel>
+              <Input
+                name="price.mrp"
+                value={price.mrp}
+                onChange={(e) => handleChange(e)}
+              />
+              <FormLabel>Special Price</FormLabel>
+              <Input
+                name="price.sp"
+                value={price.sp}
+                onChange={(e) => handleChange(e)}
+              />
+              <Box display={"flex"} gap={"5px"} mt={"10px"}>
+                <FormLabel>Rating</FormLabel>
 
-//               <FormLabel>Brand</FormLabel>
-//               <Input
-//                 name="brand_name"
-//                 value={brand_name}
-//                 onChange={handleChange}
-//               />
-
-//               <FormLabel>Description</FormLabel>
-//               <Input
-//                 name="product_details"
-//                 value={product_details}
-//                 onChange={handleChange}
-//               />
-
-//               <FormLabel>Mrp</FormLabel>
-//               <Input
-//                 name="price.mrp"
-//                 value={price.mrp}
-//                 type={"number"}
-//                 onChange={handleChange}
-//               />
-//               <FormLabel>Special Price</FormLabel>
-//               <Input
-//                 name="price.sp"
-//                 value={price.sp}
-//                 type={"number"}
-//                 onChange={handleChange}
-//               />
-//               <Box display={"flex"} gap={"5px"} mt={"10px"}>
-//                 <FormLabel>Rating</FormLabel>
-
-//                 <Input
-//                   name="customer_rating"
-//                   value={customer_rating}
-//                   type={"number"}
-//                   onChange={handleChange}
-//                 />
-//                 <FormLabel>Quantity</FormLabel>
-//                 <Input
-//                   name="quantity"
-//                   value={quantity}
-//                   type={"number"}
-//                   onChange={handleChange}
-//                 />
-//               </Box>
-//               <Box display={"flex"} justifyContent={"space-around"} mt="10px">
-//                 <Button onClick={(e) => handleSubmit(e)} colorScheme={"green"}>
-//                   Submit Changes
-//                 </Button>
-//               </Box>
-//             </FormControl>
-//           </ModalBody>
-//           <ModalFooter>
-//             <Button onClick={onClose}>Close</Button>
-//           </ModalFooter>
-//         </ModalContent>
-//       </Modal>
-//     </>
-//   );
-// }
-// export default BackdropExample;
+                <Input
+                  name="customer_rating"
+                  value={customer_rating}
+                  type={"number"}
+                  onChange={(e) => handleChange(e)}
+                />
+                <FormLabel>Quantity</FormLabel>
+                <Input
+                  name="quantity"
+                  value={quantity}
+                  type={"number"}
+                  onChange={(e) => handleChange(e)}
+                />
+              </Box>
+              <Box mt="12px" display={"flex"} justifyContent={"center"}>
+                <Button onClick={(e) => handleSubmit(e)} colorScheme={"green"}>
+                  {isLoading ? "Submitting..." : "Submit Changes"}
+                </Button>
+              </Box>
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+export default BackdropExample;

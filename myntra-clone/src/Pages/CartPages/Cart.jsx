@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import {
   Box,
-  Divider,
   HStack,
-  SimpleGrid,
   StackDivider,
   VStack,
   Text,
@@ -18,21 +16,10 @@ import {
   ModalContent,
   ModalHeader,
   ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
   Center,
-  Toast,
-  useToast,
-  Stack,
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { CartNavbar } from "../../Components/CartComponents/CartNavbar";
 import { CartFooter } from "../../Components/CartComponents/CartFooter";
 import { useEffect } from "react";
@@ -49,7 +36,7 @@ export const Cart = () => {
   const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
   const [addressDetail, setAddress] = useState({});
-  const { name, mobileNo, pinCode, area, town, city, state } = addressDetail;
+  const { name, pinCode, area, town, city, state } = addressDetail;
   const [totalMRP, setTotalMRP] = useState(0);
   const [totalMRPDiscount, setTotalMRPDiscount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(totalMRP - totalMRPDiscount);

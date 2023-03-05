@@ -274,8 +274,8 @@ function Store() {
           }}
         >
           {isLoading &&
-            arr.map((item) => {
-              return <AdminProductCardSkeleton />;
+            arr.map((item, index) => {
+              return <AdminProductCardSkeleton key={index} />;
             })}
           {mensJeans &&
             category == "men-jeans" &&

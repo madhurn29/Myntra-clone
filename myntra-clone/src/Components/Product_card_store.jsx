@@ -1,7 +1,7 @@
 import { Box, Image, Text, Icon } from "@chakra-ui/react";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { MdDelete,MdModeEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import BackdropExample from "../AdminPages/EditModal";
 function Product_card_store({
   id,
@@ -12,26 +12,23 @@ function Product_card_store({
   name,
   price,
   handleDelete,
-  onClick
+  sizes,
+  product_details,
+  customer_rating,
+  quantity,
 }) {
   //Todo: To go to edit product page, id is needed along with category , so i called 'linkCategory' and "category" as a prop here, linkCategory is the server path and category is just to get the reference of particular category so that i can filter accoridingly in edit product page
 
   const handleDeleteClick = (id, linkCategory) => {
-    handleDelete(id, linkCategory)
-    // console.log("hi", id, linkCategory);
-
-
+    handleDelete(id, linkCategory);
   };
+  // console.log("hi", id, linkCategory);
 
-  const handleEdit=()=>{
-    // BackdropExample()
-    alert("Hi")
-  }
   return (
-    <Box _hover={{padding:"4px"}} boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px;"} cursor={"pointer"}>
+    <Box boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px;"} cursor={"pointer"}>
       <Link to={`/store/${category}-${id}`}>
         <Box>
-          <Image src={images[0]} />
+          <Image _hover={{ padding: "4px" }} src={images[0]} />
         </Box>
       </Link>
       <Box textAlign={"left"} pl={{ lg: "5px" }}>
@@ -51,16 +48,33 @@ function Product_card_store({
             {" "}
             ({price.discount}%)
           </Text>
-          <Icon as={MdDelete} onClick={() => handleDeleteClick(id, linkCategory)} />
-         <Icon as={MdModeEdit} onClick={onClick} />
-         {/* onClick={() => {
+          <Icon
+            as={MdDelete}
+            onClick={() => handleDeleteClick(id, linkCategory)}
+          />
+          {/* <Icon as={MdModeEdit} onClick={onClick} /> */}
+          <BackdropExample
+            id={id}
+            title={name}
+            brand={brand_name}
+            desc={product_details}
+            mrpPrice={price.mrp}
+            SpecialPrice={price.sp}
+            productRating={customer_rating}
+            productQuantity={quantity}
+            productImages={images}
+            productSizes={sizes}
+            productId={id}
+            productDiscount={price.discount}
+            linkCategory={linkCategory}
+          />
+          {/* onClick={() => {
           setOverlay(<OverlayOne />);
           onOpen();
         }}
       >
         
       </Icon> */}
-           
         </Box>
       </Box>
     </Box>

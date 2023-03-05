@@ -3,7 +3,6 @@ import {
   Box,
   HStack,
   Grid,
-  Tag,
   VStack,
   Image,
   Text,

@@ -33,7 +33,6 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-
 const LinkItems = [
   { name: "Dashboard", icon: FiHome, to: "/dashboard" },
   { name: "Store", icon: FiTrendingUp, to: "/store" },
@@ -88,7 +87,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Link to="/dashboard">
           <Box>
-            <Image marginTop="8px" marginLeft={"30px"} w="60px" h="60px" src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png" />
+            <Image
+              marginTop="8px"
+              marginLeft={"30px"}
+              w="60px"
+              h="60px"
+              src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png"
+            />
           </Box>
         </Link>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
@@ -165,7 +170,13 @@ const MobileNav = ({ onOpen, heading, ...rest }) => {
         fontFamily="monospace"
         fontWeight="bold"
       >
-        Logo
+        <Image
+          marginTop="8px"
+          marginLeft={"30px"}
+          w="60px"
+          h="60px"
+          src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png"
+        />
       </Text>
 
       <HStack
@@ -173,7 +184,9 @@ const MobileNav = ({ onOpen, heading, ...rest }) => {
         w={"100%"}
         spacing={{ base: "0", md: "6" }}
       >
-        <Text Text ml={"5px"}>{heading}</Text>
+        <Text Text ml={"5px"}>
+          {heading}
+        </Text>
         <Spacer />
         <IconButton
           size="lg"
@@ -219,7 +232,9 @@ const MobileNav = ({ onOpen, heading, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem>
+                <Link to="/">Sign out</Link>
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

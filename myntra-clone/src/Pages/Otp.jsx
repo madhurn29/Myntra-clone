@@ -8,7 +8,6 @@ import {
   Link as ChakraLink,
   PinInput,
   PinInputField,
-  Img,
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";

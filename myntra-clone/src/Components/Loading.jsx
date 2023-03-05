@@ -2,7 +2,7 @@ import { Box, Image, Button, Text, Skeleton } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import styles from "../styles/card.module.css"
 
-const Loading = ({ images, sizes, customer_rating, price, name, brand_name }) => {
+const Loading = ({  sizes, customer_rating, price, name, brand_name }) => {
 
     const [img, setImg] = useState(true);
     const [wish, setWish] = useState(false);

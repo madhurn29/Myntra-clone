@@ -4,12 +4,10 @@ import {
   ModalFooter,
   FormControl,
   Input,
-  Box,
   VStack,
   HStack,
   FormLabel,
   Button,
-  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 // import axios from "axios";
@@ -43,16 +41,16 @@ export const AddressModel = ({ onClose, setAddress }) => {
       town &&
       city &&
       state &&
-      +mobileNo == mobileNo &&
-      name != +name &&
-      pinCode == +pinCode &&
-      area != +area &&
-      town != +town &&
-      city != +city &&
-      state != +state &&
+      +mobileNo === mobileNo &&
+      name !== +name &&
+      pinCode === +pinCode &&
+      area !== +area &&
+      town !== +town &&
+      city !== +city &&
+      state !== +state &&
       name.length > 2 &&
-      mobileNo.length == 10 &&
-      pinCode.length == 6
+      mobileNo.length === 10 &&
+      pinCode.length === 6
     ) {
       setAddress(addresRef.current);
       onClose();

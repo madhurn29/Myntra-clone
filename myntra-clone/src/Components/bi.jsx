@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import {
   IconButton,
   Box,
@@ -6,13 +6,10 @@ import {
   Flex,
   Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
   useDisclosure,
-  BoxProps,
-  FlexProps,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -23,8 +20,6 @@ import {
   FiMenu,
 } from "react-icons/fi";
 import { Link as RouterLink } from "react-router-dom";
-import { IconType } from "react-icons";
-import { ReactText } from "react";
 
 const LinkItems = [
   { name: "Dashboard", icon: FiHome, to: "/dashboard" },
@@ -37,12 +32,12 @@ const LinkItems = [
 export default function AdminSidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box  minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
       />
-      <Drawer 
+      <Drawer
         autoFocus={false}
         isOpen={isOpen}
         placement="left"
@@ -51,7 +46,7 @@ export default function AdminSidebar({ children }) {
         onOverlayClick={onClose}
         size="full"
       >
-        <DrawerContent >
+        <DrawerContent>
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
@@ -66,7 +61,7 @@ export default function AdminSidebar({ children }) {
 
 const SidebarContent = ({ onClose, ...rest }) => {
   return (
-    <Box 
+    <Box
       bg={useColorModeValue("white", "gray.900")}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
@@ -90,7 +85,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ to,icon, children, ...rest }) => {
+const NavItem = ({ to, icon, children, ...rest }) => {
   return (
     <RouterLink
       to={to}

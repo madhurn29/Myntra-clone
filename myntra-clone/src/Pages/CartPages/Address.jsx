@@ -12,7 +12,6 @@ import {
   Tag,
   Button,
   Image,
-  Grid,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -24,13 +23,12 @@ import {
 import { CartFooter } from "../../Components/CartComponents/CartFooter";
 // import logoPic from "../Assets/logoPic.png"
 import { AddressModel } from "../../Components/CartComponents/AddressModel";
-import { useLocation } from "react-router-dom";
 import deliveryPic from "../../Components/CartComponents/Image/delivery.png";
 // import axios from "axios";
 
 export const Address = () => {
   const [addressDetail, setAddress] = useState({});
-  const { name, mobileNo, pinCode, area, town, city, state } = addressDetail;
+  const { name, mobileNo, pinCode } = addressDetail;
   const { isOpen, onOpen, onClose } = useDisclosure();
   //   const location = useLocation();
   //   const { totalAmount, totalMRP, totalMRPDiscount } = props.location.state;
