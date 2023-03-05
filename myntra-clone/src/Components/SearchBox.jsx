@@ -6,7 +6,7 @@ const SearchBox = () => {
     return (
         <Box padding={"15px 0px 15px 0px"}>
             <Stack spacing={2} align="center">
-                <InputGroup marginRight={"20px"} bg={"#f5f5f6"} w="330px" borderRadius={"5px"}>
+                <InputGroup marginRight={"20px"} bg={"#f5f5f6"} w="420px" borderRadius={"5px"}>
                     <InputLeftElement
                         pointerEvents='none'
                         children={<FiSearch color='gray' />}

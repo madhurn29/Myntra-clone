@@ -21,8 +21,8 @@ function Product_card_store({
 
   const handleDeleteClick = (id, linkCategory) => {
     handleDelete(id, linkCategory);
-    // console.log("hi", id, linkCategory);
   };
+  // console.log("hi", id, linkCategory);
 
   return (
     <Box boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px;"} cursor={"pointer"}>
@@ -66,6 +66,7 @@ function Product_card_store({
             productSizes={sizes}
             productId={id}
             productDiscount={price.discount}
+            linkCategory={linkCategory}
           />
           {/* onClick={() => {
           setOverlay(<OverlayOne />);

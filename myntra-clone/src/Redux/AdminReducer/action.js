@@ -63,7 +63,7 @@ export const patchRequestforAdminSide = (id, category, obj) => (dispatch) => {
   dispatch(patchRequestAdminSide);
 
   console.log(id, category, obj, "from action");
-  axios
+  return axios
     .patch(`https://myntra-api-mfh1.onrender.com/${category}/${id}`, obj)
     .then((res) => {
       dispatch(patchRequestSuccessAdminSide());

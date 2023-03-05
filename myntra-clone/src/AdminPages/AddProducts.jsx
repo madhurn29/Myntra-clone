@@ -85,20 +85,40 @@ function AddProducts() {
   // console.log(data);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(category,data,"handleSubmit");
-   
-    if (category === "men-jeans") {
-      dispatch(postRequestAdminSide("men-jeans", data));
-    } else if (category === "men-t-shirts") {
-      dispatch(postRequestAdminSide("men-t-shirts", data));
-    } else if (category === "women-kurtas-suits") {
-      dispatch(postRequestAdminSide("women-kurtas-suits", data));
-    } else if (category === "women-tops") {
-      dispatch(postRequestAdminSide("women-tops", data));
+
+    if (
+      name === "" ||
+      brand_name === "" ||
+      price.sp == "" ||
+      price.mrp == "" ||
+      images.length == 0 ||
+      quantity == "" ||
+      rating === "" ||
+      product_details == "" ||
+      category == ""
+    ) {
+      toast({
+        position: "top",
+        title: `Please add all the details`,
+        status: "error",
+        isClosable: true,
+        duration: 2000,
+      });
+    } else {
+      if (category === "men-jeans") {
+        dispatch(postRequestAdminSide("men-jeans", data));
+      } else if (category === "men-t-shirts") {
+        dispatch(postRequestAdminSide("men-t-shirts", data));
+      } else if (category === "women-kurtas-suits") {
+        dispatch(postRequestAdminSide("women-kurtas-suits", data));
+      } else if (category === "women-tops") {
+        dispatch(postRequestAdminSide("women-tops", data));
+      }
+      callToast();
+      setData(initilalData);
+      setCategory("");
     }
-    callToast();
-    setData(initilalData)
-    setCategory("")
+    console.log(category, data, "handleSubmit");
   };
   return (
     <AdminSidebar heading={"Add Products"}>

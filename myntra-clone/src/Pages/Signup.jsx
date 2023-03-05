@@ -42,7 +42,7 @@ const Signup = () => {
     return store.AuthReducer.isLoading;
   });
 
-  console.log(isLoading);
+  // console.log(isLoading);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.length !== 10 || +input != input) {

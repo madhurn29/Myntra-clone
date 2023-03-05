@@ -8,7 +8,6 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  Text,
   Icon,
   Input,
   FormControl,
@@ -17,6 +16,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRequestforAdminSide,
+  patchRequestforAdminSide,
+} from "../Redux/AdminReducer/action";
 const initilalData = {
   id: "",
   name: "",
@@ -43,11 +47,18 @@ function BackdropExample({
   productImages,
   productSizes,
   productId,
-  productDiscount
+  productDiscount,
+  linkCategory,
 }) {
   const [data, setData] = useState(initilalData);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((store) => {
+    return store.AdminReducer.isLoading;
+  });
 
+  console.log(isLoading);
   const {
+    id,
     name,
     price,
     brand_name,
@@ -78,20 +89,44 @@ function BackdropExample({
         mrp: mrpPrice,
         discount: productDiscount,
         sp: SpecialPrice,
-      }
+      },
     });
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log(name, value);
-    setData({ ...data, [name]: value });
+    if (name === "price.mrp") {
+      setData({ ...data, price: { ...price, mrp: +value } });
+    } else if (name === "images") {
+      setData({ ...data, images: [value] });
+    } else if (name === "price.sp") {
+      setData({
+        ...data,
+        price: {
+          ...price,
+          sp: +value,
+        },
+      });
+    } else {
+      setData({
+        ...data,
+        [name]: value,
+        price: {
+          ...price,
+          discount: Math.floor(((price.mrp - price.sp) / price.mrp) * 100),
+        },
+      });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    onClose();
+    console.log(linkCategory);
+    dispatch(patchRequestforAdminSide(id, linkCategory, data)).then((res) => {
+      dispatch(getRequestforAdminSide({}, linkCategory));
+      onClose();
+    });
   };
 
   return (
@@ -164,7 +199,7 @@ function BackdropExample({
               </Box>
               <Box mt="12px" display={"flex"} justifyContent={"center"}>
                 <Button onClick={(e) => handleSubmit(e)} colorScheme={"green"}>
-                  Submit Changes
+                  {isLoading ? "Submitting..." : "Submit Changes"}
                 </Button>
               </Box>
             </FormControl>
