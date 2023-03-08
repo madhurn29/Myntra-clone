@@ -32,7 +32,7 @@ export const AddressModel = ({ onClose, setAddress }) => {
   const handleAddress = () => {
     const { name, mobileNo, pinCode, area, town, city, state } =
       addresRef.current;
-
+    console.log(addresRef.current);
     if (
       name &&
       mobileNo &&
@@ -41,13 +41,13 @@ export const AddressModel = ({ onClose, setAddress }) => {
       town &&
       city &&
       state &&
-      +mobileNo === mobileNo &&
-      name !== +name &&
-      pinCode === +pinCode &&
-      area !== +area &&
-      town !== +town &&
-      city !== +city &&
-      state !== +state &&
+      // +mobileNo === mobileNo &&
+      // name !== +name &&
+      // pinCode === +pinCode &&
+      // area !== +area &&
+      // town !== +town &&
+      // city !== +city &&
+      // state !== +state &&
       name.length > 2 &&
       mobileNo.length === 10 &&
       pinCode.length === 6
