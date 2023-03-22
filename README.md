@@ -25,7 +25,7 @@ Myntra is a one stop shop for all your fashion and lifestyle needs. Being India'
 
 ## Team Members
 - Madhur Nadamwar
-- Umeer Ahmad
+- Umer Ahmad
 - Pramod Kumar
 - Sai Kiran
 
