@@ -23,11 +23,10 @@ export const CartProductItem = ({
   price,
   sizes,
   images,
-  handleCartProducts,
-  setTotalAmount,
-  setTotalMRP,
-  setTotalMRPDiscount,
   currentSize,
+  handleQuantity,
+  handleDelete,
+  quantity
 }) => {
   const { mrp, discount, sp } = price;
   // console.log(mrp,discount,sp);
@@ -51,43 +50,8 @@ export const CartProductItem = ({
   };
 
   //   take care of quantity
-  const handleQty = (e) => {
-    e = e.target.value;
-    setTotalMRP((prev) => prev + mrp * (e - currentQty));
-    // console.log
-    setTotalMRPDiscount(
-      (prev) => prev + mrp * (e - currentQty) - sp * (e - currentQty)
-    );
-    setTotalAmount((prev) => prev + sp * (e - currentQty));
-    setCurrentQty(e);
-  };
-  //   take care of price
-  useEffect(() => {
-    setTotalMRP((prev) => prev + mrp);
-    setTotalMRPDiscount((prev) => prev + mrp - sp);
-    setTotalAmount((prev) => prev + sp);
-  }, []);
 
   //   take care of delete
-
-  const handleDelete = () => {
-    axios({
-      method: "delete",
-      url: REACT_APP_MYNTRA_API + `cart/${id}`,
-    }).then((res) => {
-      handleCartProducts();
-      setTotalMRP((prev) => prev - mrp * currentQty);
-      setTotalAmount((prev) => prev - sp * currentQty);
-      setTotalMRPDiscount((prev) => prev - currentQty * (mrp - sp));
-      toast({
-        title: "product successfully deleted.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-    });
-  };
 
   return (
     <>
@@ -160,8 +124,8 @@ export const CartProductItem = ({
                   p={0}
                   m={0}
                   variant={"unstyled"}
-                  value={currentQty}
-                  onChange={handleQty}
+                  value={quantity}
+                  onChange={(e)=>handleQuantity(e.target.value, id)}
                   fontWeight="500"
                 >
                   <option fontWeight="500" value={1}>

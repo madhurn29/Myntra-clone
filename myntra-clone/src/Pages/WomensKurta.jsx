@@ -53,8 +53,10 @@ const WomensKurta = () => {
     let category = "women-kurtas-suits";
 
 
-    let params = {
-        _sort: order && "price.sp"
+    let params = {};
+
+    if (order) {
+      params._sort = "price.sp";
     }
     brand && (params.brand_name = brand);
     order && (params._order = order);
