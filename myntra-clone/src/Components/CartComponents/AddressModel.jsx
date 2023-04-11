@@ -41,13 +41,6 @@ export const AddressModel = ({ onClose, setAddress }) => {
       town &&
       city &&
       state &&
-      // +mobileNo === mobileNo &&
-      // name !== +name &&
-      // pinCode === +pinCode &&
-      // area !== +area &&
-      // town !== +town &&
-      // city !== +city &&
-      // state !== +state &&
       name.length > 2 &&
       mobileNo.length === 10 &&
       pinCode.length === 6

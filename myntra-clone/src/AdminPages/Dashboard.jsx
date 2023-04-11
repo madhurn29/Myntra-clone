@@ -149,7 +149,7 @@ function Dashboard() {
             >
               <Image
                 w={"80%"}
-                src="https://www.wigginsshredding.com/wp-content/uploads/2019/05/Box-Icon.png"
+                src="https://www.pngall.com/wp-content/uploads/5/Red-Shopping-Cart-Transparent.png"
               />
             </Box>
             <Box

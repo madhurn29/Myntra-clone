@@ -46,48 +46,17 @@ export const Cart = () => {
   localStorage.setItem("markedPrice", JSON.stringify(totalMRP));
   localStorage.setItem("discount", JSON.stringify(totalMRPDiscount));
   localStorage.setItem("price", JSON.stringify(totalAmount));
-  // const Products = useSelector((store) => store.AppReducer.Products);
-  // const toast = useToast();
+
   const { isOpen, onOpen, onClose } = useDisclosure;
   const REACT_APP_MYNTRA_API = "https://myntra-api-mfh1.onrender.com/";
 
-  // const [cartColor, setColor] = useState("#696b79");
-
-  // useEffect(() => {
-  //   // change the color to red only on initial page load
-  //   setColor("#20bd99");
-  // }, []);
-
-  // useEffect(() => {
-  //   axios({
-  //     url: REACT_APP_MYNTRA_API + "Address",
-  //   }).then(({ data }) => setAddress(data));
-  // }, []);
-  // console.log(cartProducts);
-  // HANDLE CART PRODUCTS
-
   useEffect(() => {
     handleCartProducts();
-  }, [cartProducts.length]);
-
-  // const handleCartProducts = () => {
-  //   axios({
-  //     method: "get",
-  //     url: REACT_APP_MYNTRA_API + "cart",
-  //   }).then(({ data }) => {
-  //     const modifiedData = data.map((item) => {
-  //       return {
-  //         ...item,
-  //         currentSize: "", // Replace with the desired value for currentSize
-  //       };
-  //     });
-  //     setCartProducts(modifiedData);
-  //   });
-  // };
+  }, []);
 
   const handleCartProducts = () => {
     setIsLoading(true);
-    axios({
+    return axios({
       method: "get",
       url: REACT_APP_MYNTRA_API + "cart",
     }).then(({ data }) => {
@@ -98,8 +67,44 @@ export const Cart = () => {
         };
       });
       setCartProducts(modifiedData);
+      calculateCartPrice(modifiedData);
       setIsLoading(false);
     });
+  };
+
+  const calculateCartPrice = (data) => {
+    let tempTotalMrpValue = 0;
+    let tempSpvalue = 0;
+    let tempDiscountValue = 0;
+    data?.forEach((item) => {
+      tempTotalMrpValue += item.price.mrp * item.quantity;
+      tempSpvalue += item.price.sp * item.quantity;
+    });
+    tempDiscountValue = tempTotalMrpValue - tempSpvalue;
+    setTotalMRP(tempTotalMrpValue);
+    setTotalAmount(tempSpvalue);
+    setTotalMRPDiscount(tempDiscountValue);
+  };
+
+  const handleQuantity = (val, id) => {
+    if (!val) {
+      val = 1;
+    }
+    axios
+      .patch(`https://myntra-api-mfh1.onrender.com/cart/${id}`, {
+        quantity: val,
+      })
+      .then((res) => {
+        handleCartProducts();
+      });
+  };
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`https://myntra-api-mfh1.onrender.com/cart/${id}`)
+      .then((res) => {
+        handleCartProducts();
+      });
   };
 
   if (isLoading) {
@@ -116,46 +121,6 @@ export const Cart = () => {
       </div>
     );
   }
-
-  // pop up notification if there is similar products
-
-  // const handleAddCart = (el) => {
-  //   toast({
-  //     title: "Please wait",
-  //     description: "We are adding your product in cart",
-  //     status: "loading",
-  //     duration: 500,
-  //     isClosable: true,
-  //     position: "top",
-  //   });
-
-  //   axios({
-  //     url: REACT_APP_MYNTRA_API + "cart",
-  //     method: "post",
-  //     data: el,
-  //   })
-  //     .then((res) => {
-  //       handleCartProducts();
-  //       toast({
-  //         title: "Product added in the cart.",
-  //         description: el.name,
-  //         status: "success",
-  //         duration: 3000,
-  //         isClosable: true,
-  //         position: "top",
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       toast({
-  //         title: "Product already present in the cart.",
-  //         description: "Title: " + el.name,
-  //         status: "warning",
-  //         duration: 3000,
-  //         isClosable: true,
-  //         position: "top",
-  //       });
-  //     });
-  // };
 
   return (
     <VStack minH="120vh" justify={"space-between"}>
@@ -302,10 +267,8 @@ export const Cart = () => {
                           <CartProductItem
                             key={item.id}
                             {...item}
-                            setTotalMRP={setTotalMRP}
-                            setTotalAmount={setTotalAmount}
-                            setTotalMRPDiscount={setTotalMRPDiscount}
-                            handleCartProducts={handleCartProducts}
+                            handleQuantity={handleQuantity}
+                            handleDelete={handleDelete}
                           />
                         );
                       })}
